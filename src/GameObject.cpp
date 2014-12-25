@@ -16,10 +16,5 @@ GameObject::GameObject(const GameObject& orig) {
 GameObject::~GameObject() {
 }
 
-void GameObject::Update() {
+void GameObject::update() {
 }
-
-void GameObject::Draw() {
-    
-}
-

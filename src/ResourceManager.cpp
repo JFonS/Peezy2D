@@ -1,0 +1,37 @@
+/* 
+ * File:   ResourceManager.cpp
+ * Author: jfons
+ * 
+ * Created on December 25, 2014, 1:49 PM
+ */
+
+#include "ResourceManager.hpp"
+#include <map>
+
+ResourceMap ResourceManager::textures = ResourceMap();
+
+void ResourceManager::deleteTexture(string textureName) {
+    ResourceMap::iterator it;
+    if ((it = textures.find(textureName)) != textures.end()) {
+        if (--(it->second.refs) < 1) {
+            delete (Texture*)it->second.res;
+            textures.erase(it);
+        } 
+    }
+}
+
+
+Texture& ResourceManager::getTexture(string textureName) {
+    Texture* ret;
+    ResourceMap::iterator it;
+    if ((it = textures.find(textureName)) != textures.end()) {
+        ret = (Texture*)it->second.res;
+        ++(it->second.refs);
+    } else {
+
+        ret = new Texture();
+        ret->loadFromFile(textureName);
+        textures.insert(pair<string,Resource>(textureName,Resource(ret)));
+    }
+    return *ret;
+}

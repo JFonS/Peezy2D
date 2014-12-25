@@ -2,25 +2,21 @@
 #define	GAMEOBJECT_HPP
 
 #include <SFML/Graphics.hpp>
+#include <string>
 using namespace sf;
+using namespace std;
 
-class GameObject {
+class GameObject : public Sprite {
 public:
     GameObject();
+    GameObject(string texture);
     GameObject(const GameObject& orig);
-    virtual ~GameObject();
-
-    Vector2i pos;
-    Vector2i scale;
-    float rot;
-    
-    Sprite sprite;
-    
-    void Draw();
-    virtual void Update();
-    
+    ~GameObject();
+      
+    virtual void update();
+      
 private:
-    
+
 };
 
 #endif	/* GAMEOBJECT_HPP */
