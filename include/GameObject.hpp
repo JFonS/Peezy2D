@@ -14,9 +14,12 @@ public:
     ~GameObject();
       
     virtual void update();
-      
+    void setTexture(string texture);
+    string getName();
+    
 private:
-
+    string textureName;
+    string name;
 };
 
 #endif	/* GAMEOBJECT_HPP */

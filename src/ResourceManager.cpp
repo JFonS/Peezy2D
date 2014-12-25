@@ -6,6 +6,7 @@
  */
 
 #include "ResourceManager.hpp"
+#include "Debug.hpp"
 #include <map>
 
 ResourceMap ResourceManager::textures = ResourceMap();
@@ -16,6 +17,7 @@ void ResourceManager::deleteTexture(string textureName) {
         if (--(it->second.refs) < 1) {
             delete (Texture*)it->second.res;
             textures.erase(it);
+            DbgLog("Deleted texture " << textureName);
         } 
     }
 }
@@ -28,7 +30,7 @@ Texture& ResourceManager::getTexture(string textureName) {
         ret = (Texture*)it->second.res;
         ++(it->second.refs);
     } else {
-
+        DbgLog("Loading texture " << textureName);
         ret = new Texture();
         ret->loadFromFile(textureName);
         textures.insert(pair<string,Resource>(textureName,Resource(ret)));

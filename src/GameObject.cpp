@@ -6,15 +6,20 @@
  */
 
 #include "GameObject.hpp"
+#include "ResourceManager.hpp"
 
-GameObject::GameObject() {
-}
-
-GameObject::GameObject(const GameObject& orig) {
-}
+GameObject::GameObject(): textureName("none"), name("none") {}
 
 GameObject::~GameObject() {
+    ResourceManager::deleteTexture(textureName);
 }
 
-void GameObject::update() {
+void GameObject::update() {}
+
+void GameObject::setTexture(string texture) {
+    ResourceManager::deleteTexture(textureName);
+    Sprite::setTexture(ResourceManager::getTexture(texture));
+    textureName = texture;
 }
+
+string GameObject::getName() { return name; }

@@ -2,6 +2,7 @@
 
 #include "GameObject.hpp"
 #include "ResourceManager.hpp"
+#include "Scene.hpp"
 
 using namespace std;
 using namespace sf;
@@ -9,9 +10,11 @@ using namespace sf;
 int main(int argc, char* argv[]) {
     
     
-    GameObject go;
-
-    go.setTexture(ResourceManager::getTexture("img.jpg"));
+    GameObject* go = new GameObject();
+    go->setTexture("img.jpg");
+    
+    Scene scene;
+    scene.addGameObject(go);
     
     Vector2i winSize(600,600);
     RenderWindow window(VideoMode(winSize.x, winSize.y), "");
@@ -25,7 +28,8 @@ int main(int argc, char* argv[]) {
         }
         
         window.clear();
-        window.draw(go);
+        scene.draw(window);
+        //window.draw(*go);
 
         window.display();
     }
