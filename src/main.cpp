@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
         }
         window.clear();
         Time dt = deltaClock.restart();
-        scene.update(dt);
+        scene._update(dt);
         scene.draw(window);
 
         window.display();

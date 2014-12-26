@@ -26,6 +26,9 @@ private:
     GameObjectMap gameObjects;
     GameObjectList drawingOrder;
     
+
+    void _update();
+
     int goID;
     string name;
     static bool zIndexSort(const GameObject* first, const GameObject* second);

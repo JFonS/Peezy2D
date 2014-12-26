@@ -39,6 +39,11 @@ GameObject* Scene::getGameObject(string name) {
 void Scene::update(Time dt) {   
 }
 
+void Scene::_update(Time dt) {
+    for (auto p : drawingOrder) p.update();
+    update();
+}
+
 void Scene::draw(RenderWindow &win) {
     drawingOrder.sort(zIndexSort);
     for (auto p : drawingOrder) win.draw(*p);
