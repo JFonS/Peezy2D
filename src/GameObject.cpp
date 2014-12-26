@@ -8,7 +8,7 @@
 #include "GameObject.hpp"
 #include "ResourceManager.hpp"
 
-GameObject::GameObject(): textureName("none"), name("none") {}
+GameObject::GameObject(): textureName("none"), name("none"), zIndex(0) {}
 
 GameObject::~GameObject() {
     ResourceManager::deleteTexture(textureName);
@@ -22,4 +22,8 @@ void GameObject::setTexture(string texture) {
     textureName = texture;
 }
 
-string GameObject::getName() { return name; }
+string GameObject::getName() const { return name; }
+
+int GameObject::getIndex() const { return zIndex; }
+
+void GameObject::setIndex(int z) { zIndex = z; }

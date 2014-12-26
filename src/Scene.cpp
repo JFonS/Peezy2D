@@ -8,20 +8,42 @@
 
 #include "Scene.hpp"
 #include "GameObject.hpp"
+#include "Debug.hpp"
 
 Scene::Scene(): name("none"), goID(0) {
+    drawingOrder = GameObjectList();
 }
 
 Scene::~Scene() {
     for (auto p : gameObjects) delete p.second;
 }
 
+
 void Scene::addGameObject(GameObject* go) {
-    gameObjects.insert(pair<string,GameObject*>(go->getName(),go));
+    string name = go->getName();
+    
+    if (name == "none") {
+        name = "go"; 
+        name.append(to_string(goID));
+        ++goID;
+    }
+    
+    gameObjects.insert(pair<string,GameObject*>(name,go));
+    
+    drawingOrder.push_front(go);
 }
 
-void Scene::update() {}
+GameObject* Scene::getGameObject(string name) {
+    return NULL;
+}
+void Scene::update(Time dt) {   
+}
 
 void Scene::draw(RenderWindow &win) {
-    for (auto p : gameObjects) win.draw(*p.second);
+    drawingOrder.sort(zIndexSort);
+    for (auto p : drawingOrder) win.draw(*p);
+}
+
+bool Scene::zIndexSort(const GameObject* first, const GameObject* second) {
+    return first->getIndex() <= second->getIndex();
 }

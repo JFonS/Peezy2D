@@ -15,11 +15,14 @@ public:
       
     virtual void update();
     void setTexture(string texture);
-    string getName();
+    string getName() const;
+    void setIndex(int z);
+    int getIndex() const;
     
 private:
     string textureName;
     string name;
+    int zIndex;
 };
 
 #endif	/* GAMEOBJECT_HPP */
