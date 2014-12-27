@@ -29,11 +29,6 @@
 /build/
 /dist/
 
-nbproject/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-.dep.inc
+.ycm*
+*.swp
+peezy

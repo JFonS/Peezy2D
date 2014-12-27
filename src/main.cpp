@@ -9,10 +9,11 @@ using namespace sf;
 
 int main(int argc, char* argv[]) {
     
-    
     GameObject* go = new GameObject();
     go->setTexture("img.jpg");
     go->setIndex(20);
+      
+    go->setColor(Color::Red);
     
     GameObject* go2 = new GameObject();
     go2->setTexture("img.jpg");

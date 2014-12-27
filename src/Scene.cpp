@@ -40,8 +40,8 @@ void Scene::update(Time dt) {
 }
 
 void Scene::_update(Time dt) {
-    for (auto p : drawingOrder) p.update();
-    update();
+    for (auto p : drawingOrder) p->update(dt);
+    update(dt);
 }
 
 void Scene::draw(RenderWindow &win) {

@@ -16,7 +16,8 @@ public:
     Scene(const Scene& orig);
     virtual ~Scene();
     
-    virtual void update(Time dt);
+    virtual void update(Time dt); 
+    void _update(Time dt);
     void draw(RenderWindow &win);
     
     void addGameObject(GameObject* go);
@@ -25,9 +26,8 @@ public:
 private:
     GameObjectMap gameObjects;
     GameObjectList drawingOrder;
-    
 
-    void _update();
+
 
     int goID;
     string name;

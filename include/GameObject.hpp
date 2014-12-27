@@ -13,7 +13,7 @@ public:
     GameObject(const GameObject& orig);
     ~GameObject();
       
-    virtual void update();
+    virtual void update(Time dt);
     void setTexture(string texture);
     string getName() const;
     void setIndex(int z);

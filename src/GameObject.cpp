@@ -14,7 +14,9 @@ GameObject::~GameObject() {
     ResourceManager::deleteTexture(textureName);
 }
 
-void GameObject::update() {}
+void GameObject::update(Time dt) {
+  rotate(20*dt.asSeconds());
+}
 
 void GameObject::setTexture(string texture) {
     ResourceManager::deleteTexture(textureName);
