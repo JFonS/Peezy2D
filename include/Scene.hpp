@@ -5,6 +5,7 @@
 #include <string>
 #include <list>
 #include "GameObject.hpp"
+
 using namespace std;
 
 typedef map<string,GameObject*> GameObjectMap;
@@ -12,6 +13,7 @@ typedef list<GameObject*> GameObjectList;
 
 class Scene {
 public:
+
     Scene();
     Scene(const Scene& orig);
     virtual ~Scene();
@@ -24,13 +26,12 @@ public:
     GameObject* getGameObject(string name);
     
 private:
+
     GameObjectMap gameObjects;
     GameObjectList drawingOrder;
 
-
-
-    int goID;
     string name;
+    int goID;
     static bool zIndexSort(const GameObject* first, const GameObject* second);
 };
 

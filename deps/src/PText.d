@@ -1,4 +1,4 @@
-src/main.o: src/main.cpp /usr/include/stdc-predef.h \
+src/PText.o: src/PText.cpp /usr/include/stdc-predef.h include/PText.hpp \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
@@ -201,6 +201,4 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h \
  /usr/include/i386-linux-gnu/c++/4.8/bits/c++io.h \
  /usr/include/c++/4.8/bits/fstream.tcc include/GameObject.hpp \
  include/ResourceManager.hpp include/Scene.hpp /usr/include/c++/4.8/list \
- /usr/include/c++/4.8/bits/stl_list.h /usr/include/c++/4.8/bits/list.tcc \
- include/GameObject.hpp include/PText.hpp include/Debug.hpp \
- include/ResourceManager.hpp include/Scene.hpp
+ /usr/include/c++/4.8/bits/stl_list.h /usr/include/c++/4.8/bits/list.tcc

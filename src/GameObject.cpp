@@ -5,8 +5,8 @@
  * Created on December 25, 2014, 12:13 PM
  */
 
-#include "GameObject.hpp"
-#include "ResourceManager.hpp"
+#include "include/GameObject.hpp"
+#include "include/ResourceManager.hpp"
 
 GameObject::GameObject(): textureName("none"), name("none"), zIndex(0) {}
 

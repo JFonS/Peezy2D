@@ -6,9 +6,9 @@
  * Created on December 25, 2014, 7:44 PM
  */
 
-#include "Scene.hpp"
-#include "GameObject.hpp"
-#include "Debug.hpp"
+#include "include/Scene.hpp"
+#include "include/GameObject.hpp"
+#include "include/Debug.hpp"
 
 Scene::Scene(): name("none"), goID(0) {
     drawingOrder = GameObjectList();
