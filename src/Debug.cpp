@@ -1,6 +1,7 @@
-#include "Debug.hpp"
-
 #include <SFML/Graphics.hpp>
+
+#include "include/Debug.hpp"
+
 using namespace sf;
 
 string Debug::logFile;
