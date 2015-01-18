@@ -14,19 +14,19 @@ typedef list<GameObject*> GameObjectList;
 class Scene {
 public:
 
-    Scene();
-    Scene(const Scene& orig);
+    Scene(string name);
     virtual ~Scene();
     
-    virtual void update(Time dt); 
-    void _update(Time dt);
-    void draw(RenderWindow &win);
+    virtual void update(float dt); 
+    void _update(float dt);
+    void draw(RenderWindow *win);
     
     void addGameObject(GameObject* go);
     GameObject* getGameObject(string name);
-    
-private:
+   
+    string getName();
 
+private:
     GameObjectMap gameObjects;
     GameObjectList drawingOrder;
 

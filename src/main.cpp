@@ -1,17 +1,18 @@
 #include <SFML/Graphics.hpp>
 
-#include "include/Debug.hpp"
-#include "include/GameObject.hpp"
-#include "include/ResourceManager.hpp"
-#include "include/Scene.hpp"
-#include "include/PText.hpp"
+#include "Debug.hpp"
+#include "GameObject.hpp"
+#include "ResourceManager.hpp"
+#include "Scene.hpp"
+#include "PText.hpp"
+#include "PeezyWin.hpp"
 
 using namespace std;
 using namespace sf;
 
 int main(int argc, char* argv[]) {
     
-    GameObject* go = new GameObject();
+    /*GameObject* go = new GameObject();
     go->setTexture("img.jpg");
     go->setIndex(20);
     go->setColor(Color::Red);
@@ -30,12 +31,15 @@ int main(int argc, char* argv[]) {
     go2->move(100, 100);
     go2->setIndex(50);
     
-    Scene scene;
+    Scene scene("game");
     scene.addGameObject(go);
-    scene.addGameObject(go2);
+    scene.addGameObject(go2);*/
+    
     
     Vector2i winSize(600, 600);
-    RenderWindow window(VideoMode(winSize.x, winSize.y), "");
+    PeezyWin win = PeezyWin(winSize);
+
+    /*RenderWindow window(VideoMode(winSize.x, winSize.y), "");
 
     //scene.getGameObject("go1")->setIndex(-10);
     Clock deltaClock;
@@ -48,12 +52,12 @@ int main(int argc, char* argv[]) {
         window.clear();
         Time dt = deltaClock.restart();
         scene._update(dt);
-        scene.draw(window);
+        scene.draw(&window);
         t->update();
         t->draw(window);
 
         window.display();
-    }
+    }*/
     return 0;
 }
 

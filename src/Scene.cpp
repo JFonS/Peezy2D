@@ -1,16 +1,8 @@
-
-/* 
- * File:   Scene.cpp
- * Author: jfons
- * 
- * Created on December 25, 2014, 7:44 PM
- */
-
 #include "include/Scene.hpp"
 #include "include/GameObject.hpp"
 #include "include/Debug.hpp"
 
-Scene::Scene(): name("none"), goID(0) {
+Scene::Scene(string n): name(n), goID(0) {
     drawingOrder = GameObjectList();
 }
 
@@ -29,26 +21,33 @@ void Scene::addGameObject(GameObject* go) {
     }
     
     gameObjects.insert(pair<string,GameObject*>(name,go));
-    
+    DbgLog("Added " << name << " to " << this->name);  
     drawingOrder.push_front(go);
 }
 
 GameObject* Scene::getGameObject(string name) {
-    return NULL;
-}
-void Scene::update(Time dt) {   
-}
-
-void Scene::_update(Time dt) {
-    for (auto p : drawingOrder) p->update(dt);
-    update(dt);
+  if (gameObjects.find(name) != gameObjects.end()) {
+    return gameObjects[name];
+  } else {
+    DbgWarning("The object doesn't exist");
+  }
+  return NULL;
 }
 
-void Scene::draw(RenderWindow &win) {
+void Scene::update(float dt) {}
+
+void Scene::_update(float dt) {
+  for (auto p : drawingOrder) p->update(dt);
+  update(dt);
+}
+
+void Scene::draw(RenderWindow *win) {
     drawingOrder.sort(zIndexSort);
-    for (auto p : drawingOrder) win.draw(*p);
+    for (auto p : drawingOrder) win->draw(*p);
 }
 
 bool Scene::zIndexSort(const GameObject* first, const GameObject* second) {
     return first->getIndex() <= second->getIndex();
 }
+
+string Scene::getName() { return name; }
