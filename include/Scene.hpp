@@ -4,12 +4,12 @@
 #include <map>
 #include <string>
 #include <list>
-#include "GameObject.hpp"
+#include "Node.hpp"
 
 using namespace std;
 
-typedef map<string,GameObject*> GameObjectMap;
-typedef list<GameObject*> GameObjectList;
+typedef map<string,Node*> NodeMap;
+typedef list<Node*> NodeList;
 
 class Scene {
 public:
@@ -19,20 +19,20 @@ public:
     
     virtual void update(float dt); 
     void _update(float dt);
-    void draw(RenderWindow *win);
+    void draw(RenderTarget &win);
     
-    void addGameObject(GameObject* go);
-    GameObject* getGameObject(string name);
+    void addNode(Node* go);
+    Node* getNode(string name);
    
     string getName();
 
 private:
-    GameObjectMap gameObjects;
-    GameObjectList drawingOrder;
+    NodeMap gameObjects;
+    NodeList drawingOrder;
 
     string name;
     int goID;
-    static bool zIndexSort(const GameObject* first, const GameObject* second);
+    static bool zIndexSort(const Node* first, const Node* second);
 };
 
 #endif	/* SCENE_HPP */

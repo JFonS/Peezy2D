@@ -1,21 +1,18 @@
-/* 
- * File:   GameObject.cpp
- * Author: jfons
- * 
- * Created on December 25, 2014, 12:13 PM
- */
-
 #include "include/GameObject.hpp"
 #include "include/ResourceManager.hpp"
+#include "Debug.hpp"
 
-GameObject::GameObject(): textureName("none"), name("none"), zIndex(0) {}
+GameObject::GameObject(): textureName("none") {
+  name = "none";
+  zIndex = 0;
+}
 
 GameObject::~GameObject() {
     ResourceManager::deleteTexture(textureName);
 }
 
 void GameObject::update(float dt) {
-  rotate(20*dt);
+//  rotate(20*dt);
 }
 
 void GameObject::setTexture(string texture) {
@@ -24,8 +21,6 @@ void GameObject::setTexture(string texture) {
     textureName = texture;
 }
 
-string GameObject::getName() const { return name; }
-
-int GameObject::getIndex() const { return zIndex; }
-
-void GameObject::setIndex(int z) { zIndex = z; }
+void GameObject::onDraw(RenderTarget& target, const Transform& transform) const {
+  target.draw(*this, transform);
+}

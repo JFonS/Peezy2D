@@ -1,5 +1,6 @@
 #include "PeezyWin.hpp"
 #include "Debug.hpp"
+#include "GameObject.hpp"
 
 PeezyWin::PeezyWin(Vector2i size) {
     window = new RenderWindow(VideoMode(size.x, size.y), "");
@@ -36,15 +37,17 @@ void PeezyWin::startUp() {
     go2->setIndex(50);
     
     Scene* scene = new Scene("game");
-    scene->addGameObject(go);
-    scene->addGameObject(go2);
+    scene->addNode(go);
+    go->addChild(go2);
 
     addScene(scene);
     setActiveScene("game");
 };
 
 void PeezyWin::loop(float dt){
-  activeScene->getGameObject("go1")->move(dt*20,dt*20);
+  GameObject* p;
+  p = static_cast<GameObject*>(activeScene->getNode("go0"));
+  p->move(dt*20,dt*20);
 }
 
 void PeezyWin::_loop() {
@@ -61,7 +64,7 @@ void PeezyWin::_loop() {
         loop(dt);
         if (activeScene != NULL) {
           activeScene->_update(dt);
-          activeScene->draw(window);
+          activeScene->draw(*window);
         }
 
         window->display();

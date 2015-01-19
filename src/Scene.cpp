@@ -1,17 +1,16 @@
 #include "include/Scene.hpp"
-#include "include/GameObject.hpp"
+#include "include/Node.hpp"
 #include "include/Debug.hpp"
 
 Scene::Scene(string n): name(n), goID(0) {
-    drawingOrder = GameObjectList();
+    drawingOrder = NodeList();
 }
 
 Scene::~Scene() {
     for (auto p : gameObjects) delete p.second;
 }
 
-
-void Scene::addGameObject(GameObject* go) {
+void Scene::addNode(Node* go) {
     string name = go->getName();
     
     if (name == "none") {
@@ -20,12 +19,12 @@ void Scene::addGameObject(GameObject* go) {
         ++goID;
     }
     
-    gameObjects.insert(pair<string,GameObject*>(name,go));
+    gameObjects.insert(pair<string,Node*>(name,go));
     DbgLog("Added " << name << " to " << this->name);  
     drawingOrder.push_front(go);
 }
 
-GameObject* Scene::getGameObject(string name) {
+Node* Scene::getNode(string name) {
   if (gameObjects.find(name) != gameObjects.end()) {
     return gameObjects[name];
   } else {
@@ -41,12 +40,12 @@ void Scene::_update(float dt) {
   update(dt);
 }
 
-void Scene::draw(RenderWindow *win) {
+void Scene::draw(RenderTarget &win) {
     drawingOrder.sort(zIndexSort);
-    for (auto p : drawingOrder) win->draw(*p);
+    for (auto p : drawingOrder) p->Node::draw(win, Transform::Identity);
 }
 
-bool Scene::zIndexSort(const GameObject* first, const GameObject* second) {
+bool Scene::zIndexSort(const Node* first, const Node* second) {
     return first->getIndex() <= second->getIndex();
 }
 

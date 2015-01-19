@@ -2,11 +2,15 @@
 #define	GAMEOBJECT_HPP
 
 #include <SFML/Graphics.hpp>
+#include "Node.hpp"
 #include <string>
+#include <map>
+#include <list>
 using namespace sf;
 using namespace std;
 
-class GameObject : public Sprite {
+
+class GameObject : public Node, public Sprite {
 public:
     GameObject();
     GameObject(string texture);
@@ -15,14 +19,10 @@ public:
       
     virtual void update(float dt);
     void setTexture(string texture);
-    string getName() const;
-    void setIndex(int z);
-    int getIndex() const;
-    
+
 private:
     string textureName;
-    string name;
-    int zIndex;
+    virtual void onDraw(RenderTarget& target, const Transform& transform) const;
 };
 
 #endif	/* GAMEOBJECT_HPP */

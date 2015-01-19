@@ -1,10 +1,3 @@
-/* 
- * File:   ResourceManager.cpp
- * Author: jfons
- * 
- * Created on December 25, 2014, 1:49 PM
- */
-
 #include "include/ResourceManager.hpp"
 #include "include/Debug.hpp"
 #include <map>
