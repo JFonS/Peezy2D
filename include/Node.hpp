@@ -32,6 +32,7 @@ public:
   void draw(RenderTarget& target, const Transform& parentTransform);
   void update(float dt);
   
+  void onEvent(PEvent &e);
 protected: 
 
   virtual void onDraw(RenderTarget& target, const Transform& transform) = 0;
@@ -43,8 +44,6 @@ protected:
   virtual void onMouseMove(PEvent &e);
   virtual void onMouseDown(PEvent &e);
   virtual void onMouseUp(PEvent &e);
-
-  void onEvent(PEvent &e);
 
   Transform myTransform;
 

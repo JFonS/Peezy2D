@@ -56,3 +56,26 @@ void Node::onKeyUp(PEvent &e){}
 void Node::onMouseMove(PEvent &e){}
 void Node::onMouseDown(PEvent &e){}
 void Node::onMouseUp(PEvent &e){}
+
+void Node::onEvent(PEvent &e) {
+	switch (e.type) {
+    case Event::KeyPressed:
+      onKeyDown(e);
+      break;
+    case Event::KeyReleased:
+      onKeyUp(e);
+      break;
+    case Event::MouseMoved:
+      onMouseMove(e);
+      break;
+    case Event::MouseButtonPressed:
+      onMouseDown(e);
+      break;
+    case Event::MouseButtonReleased:
+      onMouseUp(e);
+      break;
+    default: break;
+  }
+  if (e.propagate) for (auto p : childrenOrder) p->onEvent(e);
+
+}

@@ -24,3 +24,8 @@ void GameObject::onDraw(RenderTarget& target, const Transform& transform) {
 void GameObject::onUpdate(float dt){}
 
 const Transform & GameObject::getNodeTransform() { return Sprite::getTransform();}
+
+void GameObject::onKeyDown(PEvent &e) {
+  rotate(10.);
+  e.propagate = false;
+}

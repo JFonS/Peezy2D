@@ -22,6 +22,7 @@ public:
     //Sprite sprite;
 
 private:
+    void onKeyDown(PEvent &e);
 
     string textureName;
     virtual void onDraw(RenderTarget& target, const Transform& transform);

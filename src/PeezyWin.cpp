@@ -65,6 +65,10 @@ void PeezyWin::_loop() {
         while (window->pollEvent(event)) {
             if (event.type == Event::Closed)
                 window->close();
+            else if (activeScene != NULL) {
+              PEvent e(event);
+              activeScene->onEvent(e);
+            }
         }
         window->clear();
         Time dTime = deltaClock.restart();
