@@ -29,13 +29,15 @@ void PeezyWin::startUp() {
     //sample stuff (TO REMOVE)
     GameObject* go = new GameObject();
     go->setTexture("img.jpg");
-    go->setIndex(20);
+    go->setIndex(200);
+    go->setRotation(45.);
     go->setColor(Color::Red);
+    go->move(100, 100);
 
     GameObject* go2 = new GameObject();
     go2->setTexture("img.jpg");
     go2->setRotation(45.);
-    go2->move(100, 100);
+    go2->move(-10, -10);
     go2->setIndex(50);
 
     PText* text = new PText("HOLA");
@@ -43,6 +45,8 @@ void PeezyWin::startUp() {
     text->setOutline(true);
     text->setOutlineStroke(3);
     text->setOutlineColor(Color::Green);
+    text->rotate(25.);
+    
     Scene* scene = new Scene("game");
     scene->addChild(go);
     scene->addChild(text);

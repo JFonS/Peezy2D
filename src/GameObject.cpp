@@ -20,4 +20,7 @@ void GameObject::setTexture(string texture) {
 void GameObject::onDraw(RenderTarget& target, const Transform& transform) {
   target.draw(*this, transform);
 }
+
 void GameObject::onUpdate(float dt){}
+
+const Transform & GameObject::getNodeTransform() { return Sprite::getTransform();}

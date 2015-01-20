@@ -22,8 +22,11 @@ public:
     //Sprite sprite;
 
 private:
+
     string textureName;
     virtual void onDraw(RenderTarget& target, const Transform& transform);
+    const Transform & getNodeTransform();
+
 };
 
 #endif	/* GAMEOBJECT_HPP */

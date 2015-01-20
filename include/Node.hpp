@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <list>
+#include "PEvent.hpp"
 using namespace sf;
 using namespace std;
 
@@ -31,10 +32,20 @@ public:
   void draw(RenderTarget& target, const Transform& parentTransform);
   void update(float dt);
   
-  virtual void onUpdate(float dt) = 0;
+protected: 
 
-protected:    
   virtual void onDraw(RenderTarget& target, const Transform& transform) = 0;
+  virtual const Transform & getNodeTransform();
+
+  virtual void onUpdate(float dt) = 0;
+  virtual void onKeyDown(PEvent &e);
+  virtual void onKeyUp(PEvent &e);
+  virtual void onMouseMove(PEvent &e);
+  virtual void onMouseDown(PEvent &e);
+  virtual void onMouseUp(PEvent &e);
+
+  void onEvent(PEvent &e);
+
   Transform myTransform;
 
   string name;
