@@ -11,7 +11,7 @@
 using namespace std;
 using namespace sf;
 
-class PText : public Text
+class PText : public Text, public Node
 {
 private:
     bool outline, blowing, flickering, visibleFlicker;
@@ -39,8 +39,8 @@ public:
     void blow(float multiplier, int msTotalTime);
     void flicker(int times, float msToggleTime);
 
-    void update();
-    void draw(RenderWindow &win);
+    virtual void onDraw(RenderTarget& target, const Transform& transform);
+    virtual void onUpdate(float dt);
 };
 
 #endif // PTEXT_H

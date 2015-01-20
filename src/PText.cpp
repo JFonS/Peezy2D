@@ -71,7 +71,7 @@ void PText::flicker(int times, float msToggleTime)
     fClock->restart();
 }
 
-void PText::update()
+void PText::onUpdate(float dt)
 {
     if(timesFlickered < totalTimesFlicker and fClock->getElapsedTime().asMilliseconds() >= flickerToggleTime)
     {
@@ -93,7 +93,7 @@ void PText::update()
     }
 }
 
-void PText::draw(RenderWindow &win)
+void PText::onDraw(RenderTarget& target, const Transform& transform) 
 {
     if(not visibleFlicker) return;
 
@@ -106,19 +106,19 @@ void PText::draw(RenderWindow &win)
         {
             for(int y = 0; y < outlineStroke; ++y)
             {
-                setPosition(pos.x + x, pos.y); win.draw(*this);
-                setPosition(pos.x - x, pos.y); win.draw(*this);
-                setPosition(pos.x, pos.y + y); win.draw(*this);
-                setPosition(pos.x, pos.y - y); win.draw(*this);
-                setPosition(pos.x + x, pos.y + y); win.draw(*this);
-                setPosition(pos.x + x, pos.y - y); win.draw(*this);
-                setPosition(pos.x - x, pos.y + y); win.draw(*this);
-                setPosition(pos.x - x, pos.y - y); win.draw(*this);
+                setPosition(pos.x + x, pos.y); target.draw(*this, transform);
+                setPosition(pos.x - x, pos.y); target.draw(*this, transform);
+                setPosition(pos.x, pos.y + y); target.draw(*this, transform);
+                setPosition(pos.x, pos.y - y); target.draw(*this, transform);
+                setPosition(pos.x + x, pos.y + y); target.draw(*this, transform);
+                setPosition(pos.x + x, pos.y - y); target.draw(*this, transform);
+                setPosition(pos.x - x, pos.y + y); target.draw(*this, transform);
+                setPosition(pos.x - x, pos.y - y); target.draw(*this, transform);
             }
         }
         setColor(lastColor);
         setPosition(pos);
     }
 
-    win.draw(*this);
+    target.draw(*this, transform);
 }

@@ -9,16 +9,15 @@ GameObject::GameObject(): textureName("none") {
 
 GameObject::~GameObject() {
   ResourceManager::deleteTexture(textureName);
-  
 }
 
 void GameObject::setTexture(string texture) {
   ResourceManager::deleteTexture(textureName);
-  sprite.setTexture(ResourceManager::getTexture(texture));
+  Sprite::setTexture(ResourceManager::getTexture(texture));
   textureName = texture;
 }
 
-void GameObject::onDraw(RenderTarget& target, const Transform& transform) const {
-  target.draw(sprite, transform);
+void GameObject::onDraw(RenderTarget& target, const Transform& transform) {
+  target.draw(*this, transform);
 }
 void GameObject::onUpdate(float dt){}

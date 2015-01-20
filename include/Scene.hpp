@@ -20,7 +20,7 @@ public:
   Transform camera;   
 
 private:
-  virtual void onDraw(RenderTarget& target, const Transform& transform) const;
+  virtual void onDraw(RenderTarget& target, const Transform& transform);
   
 };
 

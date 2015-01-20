@@ -8,7 +8,7 @@ Scene::Scene(string n) {
 
 void Scene::onUpdate(float dt) {}
 
-void Scene::onDraw(RenderTarget& target, const Transform& transform) const {
+void Scene::onDraw(RenderTarget& target, const Transform& transform){
 }
 
 void Scene::draw(RenderTarget& target) {

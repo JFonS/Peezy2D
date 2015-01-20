@@ -34,7 +34,7 @@ public:
   virtual void onUpdate(float dt) = 0;
 
 protected:    
-  virtual void onDraw(RenderTarget& target, const Transform& transform) const = 0;
+  virtual void onDraw(RenderTarget& target, const Transform& transform) = 0;
   Transform myTransform;
 
   string name;

@@ -1,6 +1,7 @@
 #include "PeezyWin.hpp"
 #include "Debug.hpp"
 #include "GameObject.hpp"
+#include "PText.hpp"
 
 PeezyWin::PeezyWin(Vector2i size) {
     window = new RenderWindow(VideoMode(size.x, size.y), "");
@@ -29,16 +30,22 @@ void PeezyWin::startUp() {
     GameObject* go = new GameObject();
     go->setTexture("img.jpg");
     go->setIndex(20);
-    go->sprite.setColor(Color::Red);
+    go->setColor(Color::Red);
 
     GameObject* go2 = new GameObject();
     go2->setTexture("img.jpg");
-    go2->sprite.setRotation(45.);
-    go2->sprite.move(100, 100);
+    go2->setRotation(45.);
+    go2->move(100, 100);
     go2->setIndex(50);
-    
+
+    PText* text = new PText("HOLA");
+    text->setIndex(200);
+    text->setOutline(true);
+    text->setOutlineStroke(3);
+    text->setOutlineColor(Color::Green);
     Scene* scene = new Scene("game");
     scene->addChild(go);
+    scene->addChild(text);
     go->addChild(go2);
 
     addScene(scene);
