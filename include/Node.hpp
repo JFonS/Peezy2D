@@ -15,35 +15,36 @@ typedef list<Node*> NodeList;
 
 class Node {
 public:
-    Node();
-    Node(string texture);
-    Node(const Node& orig);
-    ~Node();
+  Node();
+  Node(string texture);
+  Node(const Node& orig);
+ // ~Node();
       
-    virtual void update(float dt);
-    string getName() const;
-    void setIndex(int z);
-    int getIndex() const;
+  string getName() const;
+  void setIndex(int z);
+  int getIndex() const;
     
-    void addChild(Node* go);
-    Node* getChild(string name);
-    void removeChild(string name);
-    void removeChild(Node* go);
-    void draw(RenderTarget& target, const Transform& parentTransform);
+  void addChild(Node* go);
+  Node* getChild(string name);
+  void removeChild(string name);
+  void removeChild(Node* go);
+  void draw(RenderTarget& target, const Transform& parentTransform);
+  void update(float dt);
+  
+  virtual void onUpdate(float dt) = 0;
 
-protected:
-    
-    virtual void onDraw(RenderTarget& target, const Transform& transform) const = 0;
-    Transform m_transform;
+protected:    
+  virtual void onDraw(RenderTarget& target, const Transform& transform) const = 0;
+  Transform myTransform;
 
-    string name;
-    int zIndex;
+  string name;
+  int zIndex;
    
-    int childID;
-    NodeMap children;
-    NodeList childrenOrder;
+  int childID;
+  NodeMap children;
+  NodeList childrenOrder;
 
-    static bool zIndexSort(const Node* first, const Node* second);
+  static bool zIndexSort(const Node* first, const Node* second);
 };
 
 #endif	/* NODE_HPP */

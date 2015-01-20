@@ -9,16 +9,17 @@
 using namespace sf;
 using namespace std;
 
-
-class GameObject : public Node, public Sprite {
+class GameObject : public Node {
 public:
     GameObject();
     GameObject(string texture);
     GameObject(const GameObject& orig);
     ~GameObject();
-      
-    virtual void update(float dt);
+
     void setTexture(string texture);
+    virtual void onUpdate(float dt);
+
+    Sprite sprite;
 
 private:
     string textureName;
@@ -26,4 +27,3 @@ private:
 };
 
 #endif	/* GAMEOBJECT_HPP */
-

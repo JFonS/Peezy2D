@@ -2,51 +2,17 @@
 #include "include/Node.hpp"
 #include "include/Debug.hpp"
 
-Scene::Scene(string n): name(n), goID(0) {
-    drawingOrder = NodeList();
+Scene::Scene(string n) {
+  Node::name = n;
 }
 
-Scene::~Scene() {
-    for (auto p : gameObjects) delete p.second;
+void Scene::onUpdate(float dt) {}
+
+void Scene::onDraw(RenderTarget& target, const Transform& transform) const {
 }
 
-void Scene::addNode(Node* go) {
-    string name = go->getName();
-    
-    if (name == "none") {
-        name = "go"; 
-        name.append(to_string(goID));
-        ++goID;
-    }
-    
-    gameObjects.insert(pair<string,Node*>(name,go));
-    DbgLog("Added " << name << " to " << this->name);  
-    drawingOrder.push_front(go);
+void Scene::draw(RenderTarget& target) {
+  Transform inverseCamera = camera.getInverse();
+  childrenOrder.sort(zIndexSort);
+  for (auto p : childrenOrder) p->draw(target, inverseCamera);
 }
-
-Node* Scene::getNode(string name) {
-  if (gameObjects.find(name) != gameObjects.end()) {
-    return gameObjects[name];
-  } else {
-    DbgWarning("The object doesn't exist");
-  }
-  return NULL;
-}
-
-void Scene::update(float dt) {}
-
-void Scene::_update(float dt) {
-  for (auto p : drawingOrder) p->update(dt);
-  update(dt);
-}
-
-void Scene::draw(RenderTarget &win) {
-    drawingOrder.sort(zIndexSort);
-    for (auto p : drawingOrder) p->Node::draw(win, Transform::Identity);
-}
-
-bool Scene::zIndexSort(const Node* first, const Node* second) {
-    return first->getIndex() <= second->getIndex();
-}
-
-string Scene::getName() { return name; }

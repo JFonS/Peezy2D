@@ -11,28 +11,17 @@ using namespace std;
 typedef map<string,Node*> NodeMap;
 typedef list<Node*> NodeList;
 
-class Scene {
+class Scene: public Node {
 public:
-
-    Scene(string name);
-    virtual ~Scene();
+  Scene(string name);
     
-    virtual void update(float dt); 
-    void _update(float dt);
-    void draw(RenderTarget &win);
-    
-    void addNode(Node* go);
-    Node* getNode(string name);
-   
-    string getName();
+  virtual void onUpdate(float dt); 
+  void draw(RenderTarget& target); 
+  Transform camera;   
 
 private:
-    NodeMap gameObjects;
-    NodeList drawingOrder;
-
-    string name;
-    int goID;
-    static bool zIndexSort(const Node* first, const Node* second);
+  virtual void onDraw(RenderTarget& target, const Transform& transform) const;
+  
 };
 
 #endif	/* SCENE_HPP */

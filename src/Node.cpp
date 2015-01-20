@@ -4,10 +4,6 @@
 
 Node::Node(): name("none"), zIndex(0) {}
 
-Node::~Node() {
-    for(auto p : childrenOrder) delete p;
-}
-
 string Node::getName() const { return name; }
 
 int Node::getIndex() const { return zIndex; }
@@ -42,8 +38,13 @@ Node* Node::getChild(string name) {
 }
 
 void Node::draw(RenderTarget& target, const Transform& parentTransform) {
-  Transform combinedTransform = parentTransform * m_transform;
+  Transform combinedTransform = parentTransform * myTransform;
   onDraw(target, combinedTransform);
   childrenOrder.sort(zIndexSort);
   for (auto p : childrenOrder) p->draw(target, combinedTransform);
+}
+
+void Node::update(float dt) {
+	onUpdate(dt);
+	for (auto p : childrenOrder) p->update(dt);
 }

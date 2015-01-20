@@ -8,19 +8,17 @@ GameObject::GameObject(): textureName("none") {
 }
 
 GameObject::~GameObject() {
-    ResourceManager::deleteTexture(textureName);
-}
-
-void GameObject::update(float dt) {
-//  rotate(20*dt);
+  ResourceManager::deleteTexture(textureName);
+  
 }
 
 void GameObject::setTexture(string texture) {
-    ResourceManager::deleteTexture(textureName);
-    Sprite::setTexture(ResourceManager::getTexture(texture));
-    textureName = texture;
+  ResourceManager::deleteTexture(textureName);
+  sprite.setTexture(ResourceManager::getTexture(texture));
+  textureName = texture;
 }
 
 void GameObject::onDraw(RenderTarget& target, const Transform& transform) const {
-  target.draw(*this, transform);
+  target.draw(sprite, transform);
 }
+void GameObject::onUpdate(float dt){}

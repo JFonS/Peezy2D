@@ -25,30 +25,27 @@ void PeezyWin::setActiveScene(string scName) {
 }
 
 void PeezyWin::startUp() {
+    //sample stuff (TO REMOVE)
     GameObject* go = new GameObject();
     go->setTexture("img.jpg");
     go->setIndex(20);
-    go->setColor(Color::Red);
+    go->sprite.setColor(Color::Red);
 
     GameObject* go2 = new GameObject();
     go2->setTexture("img.jpg");
-    go2->setRotation(45.);
-    go2->move(100, 100);
+    go2->sprite.setRotation(45.);
+    go2->sprite.move(100, 100);
     go2->setIndex(50);
     
     Scene* scene = new Scene("game");
-    scene->addNode(go);
+    scene->addChild(go);
     go->addChild(go2);
 
     addScene(scene);
     setActiveScene("game");
 };
 
-void PeezyWin::loop(float dt){
-  GameObject* p;
-  p = static_cast<GameObject*>(activeScene->getNode("go0"));
-  p->move(dt*20,dt*20);
-}
+void PeezyWin::loop(float dt){}
 
 void PeezyWin::_loop() {
     Clock deltaClock;
@@ -63,7 +60,7 @@ void PeezyWin::_loop() {
         float dt = dTime.asSeconds();
         loop(dt);
         if (activeScene != NULL) {
-          activeScene->_update(dt);
+          activeScene->update(dt);
           activeScene->draw(*window);
         }
 
