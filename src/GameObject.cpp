@@ -26,6 +26,11 @@ void GameObject::onUpdate(float dt){}
 const Transform & GameObject::getNodeTransform() { return Sprite::getTransform();}
 
 void GameObject::onKeyDown(PEvent &e) {
+  if (e.key.code == Keyboard::P) {
+    Sound s;
+    s.setBuffer(ResourceManager::getSoundBuffer("assets/beep.wav"));
+    s.play();
+  }
   rotate(10.);
   e.propagate = false;
 }

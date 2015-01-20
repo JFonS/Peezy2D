@@ -2,6 +2,7 @@
 #define	RESOURCEMANAGER_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 #include <map>
 
@@ -28,11 +29,15 @@ typedef map<string,Resource> ResourceMap;
 class ResourceManager {
       
 public:
-    static Texture& getTexture(string textureName);
-    static void deleteTexture(string textureName);
-    
+    static Texture& getTexture(string texturePath);
+    static void deleteTexture(string texturePath);
+
+    static SoundBuffer& getSoundBuffer(string soundPath);
+    static void deleteSoundBuffer(string soundPath);
+
 private:
     static ResourceMap textures;
+    static ResourceMap sounds;
 };
 
 #endif	/* RESOURCEMANAGER_HPP */
