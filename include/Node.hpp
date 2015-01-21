@@ -46,6 +46,8 @@ protected:
   virtual void onMouseDown(PEvent &e);
   virtual void onMouseUp(PEvent &e);
 
+  bool isPointOverSprite(const Vector2f Position, const Sprite &Sprite);
+
   Transform myTransform;
 
   string name;

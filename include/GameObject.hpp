@@ -21,13 +21,21 @@ public:
 
     //Sprite sprite;
 
+protected:
+    bool mouseIsOver;
+
+    virtual void onMouseEnter(PEvent &e){}
+    virtual void onMouseExit(PEvent &e){}
+    virtual void onMouseOver(PEvent &e){}
 private:
+
     void onKeyDown(PEvent &e);
 
     string textureName;
     virtual void onDraw(RenderTarget& target, const Transform& transform);
     const Transform & getNodeTransform();
 
+    bool isMouseOver(const Vector2f pos);
 };
 
 #endif	/* GAMEOBJECT_HPP */
