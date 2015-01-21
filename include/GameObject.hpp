@@ -13,7 +13,7 @@ using namespace std;
 class GameObject : public Sprite, public Node {
 public:
     GameObject();
-    GameObject(string texture);
+    GameObject(string name);
     GameObject(const GameObject& orig);
     virtual ~GameObject();
 

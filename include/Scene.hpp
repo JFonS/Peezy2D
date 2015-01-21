@@ -19,7 +19,9 @@ public:
   virtual void onUpdate(float dt); 
   void draw(RenderTarget& target); 
   Transform camera;   
-
+  
+  Vector2i sceneToWin(Vector2i pos);
+  Vector2i winToScene(Vector2i pos);
 private:
   virtual void onDraw(RenderTarget& target, const Transform& transform);
   

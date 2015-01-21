@@ -4,6 +4,8 @@
 
 Node::Node(): name("none"), zIndex(0), mouseIsOver(false) {}
 
+Node::Node(string n): name(n), zIndex(0), mouseIsOver(false) {}
+
 Node::~Node()
 {
     DbgWarning("destroyed");
@@ -14,7 +16,6 @@ Node::~Node()
 }
 
 string Node::getName() const { return name; }
-
 int Node::getIndex() const { return zIndex; }
 
 void Node::setIndex(int z) { zIndex = z; }
@@ -98,7 +99,7 @@ void Node::onEvent(PEvent &e) {
 bool Node::isMouseOver(const Vector2f mousePos)
 {
     //DbgLog(mousePos.x << ", " << mousePos.y);
-    return getBoundingBox().contains(myTransform * mousePos);
+    return getBoundingBox().contains(getNodeTransform().getInverse() * mousePos);
 }
 
 Rect<float> Node::getBoundingBox()

@@ -18,7 +18,7 @@ typedef list<Node*> NodeList;
 class Node {
 public:
   Node();
-  Node(string texture);
+  Node(string name);
   Node(const Node& orig);
   virtual ~Node();
       
@@ -40,7 +40,6 @@ protected:
   NodeMap children;
   NodeList childrenOrder;
 
-  Transform myTransform;
   string name;
   int zIndex, childID;
   bool mouseIsOver;

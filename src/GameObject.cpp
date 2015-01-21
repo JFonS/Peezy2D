@@ -8,6 +8,11 @@ GameObject::GameObject(): textureName("none") {
   zIndex = 0;
 }
 
+GameObject::GameObject(string n): textureName("none") {
+  name = n;
+  zIndex = 0;
+}
+
 GameObject::~GameObject()
 {
   DbgWarning("destroyed");

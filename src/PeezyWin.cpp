@@ -41,14 +41,14 @@ Scene* PeezyWin::peekScene(){
 
 void PeezyWin::startUp() {
     //sample stuff (TO REMOVE)
-    GameObject* go = new GameObject();
+    GameObject* go = new GameObject("red");
     go->setTexture("img.jpg");
     go->setIndex(200);
     //go->setRotation(45.);
     go->setColor(Color::Red);
     go->move(100, 100);
 
-    GameObject* go2 = new GameObject();
+    GameObject* go2 = new GameObject("white");
     go2->setTexture("img.jpg");
     //go2->setRotation(45.);
     go2->move(-10, -10);
