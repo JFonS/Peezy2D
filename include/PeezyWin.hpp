@@ -1,23 +1,27 @@
 #ifndef PEEZYWIN_HPP
 #define PEEZYWIN_HPP
 
-#include "Debug.hpp"
-#include "Scene.hpp"
+#include "../include/Debug.hpp"
+#include "../include/Scene.hpp"
 #include <SFML/Graphics.hpp>
 #include <string>
-#include <map>
+#include <stack>
 
 using namespace std;
 using namespace sf;
 
-typedef map<string,Scene*> SceneMap;
+typedef stack<Scene*> SceneStack;
 
 class PeezyWin {
 public:
   PeezyWin(Vector2i size);
+  virtual ~PeezyWin();
 
-  void addScene(Scene* sc);
-  void setActiveScene(string scName);
+  void pushScene(Scene* sc);
+  void popScene();
+  void changeScene(Scene* sc);
+  Scene* peekScene();
+
 private:
   void _loop();
    
@@ -25,8 +29,7 @@ private:
   virtual void loop(float dt);
   
   RenderWindow* window;
-  SceneMap scenes;
-  Scene* activeScene;
+  SceneStack scenes;
 };
 
 #endif

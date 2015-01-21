@@ -14,7 +14,7 @@ public:
     GameObject();
     GameObject(string texture);
     GameObject(const GameObject& orig);
-    ~GameObject();
+    virtual ~GameObject();
 
     void setTexture(string texture);
     virtual void onUpdate(float dt);

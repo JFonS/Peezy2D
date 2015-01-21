@@ -43,6 +43,7 @@ PText::PText(const char* str, const Font& f, const Vector2f& pos) : PText()
 
 PText::~PText()
 {
+    DbgWarning("destroyed");
     if(fClock) delete fClock;
     if(bClock) delete bClock;
     if(font)  delete font;

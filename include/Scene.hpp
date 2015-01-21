@@ -14,6 +14,7 @@ typedef list<Node*> NodeList;
 class Scene: public Node {
 public:
   Scene(string name);
+  virtual ~Scene();
     
   virtual void onUpdate(float dt); 
   void draw(RenderTarget& target); 

@@ -6,6 +6,11 @@ Scene::Scene(string n) {
   Node::name = n;
 }
 
+Scene::~Scene()
+{
+    DbgWarning("destroyed");
+}
+
 void Scene::onUpdate(float dt) {}
 
 void Scene::onDraw(RenderTarget& target, const Transform& transform){
@@ -16,3 +21,5 @@ void Scene::draw(RenderTarget& target) {
   childrenOrder.sort(zIndexSort);
   for (auto p : childrenOrder) p->draw(target, inverseCamera);
 }
+
+

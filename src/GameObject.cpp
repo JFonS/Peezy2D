@@ -1,13 +1,17 @@
-#include "include/GameObject.hpp"
-#include "include/ResourceManager.hpp"
+#include "../include/GameObject.hpp"
+#include "../include/ResourceManager.hpp"
 #include "Debug.hpp"
+#include <stdlib.h>
 
 GameObject::GameObject(): textureName("none") {
   name = "none";
   zIndex = 0;
 }
 
-GameObject::~GameObject() {
+GameObject::~GameObject()
+{
+  DbgWarning("destroyed");
+  ResourceManager::deleteSoundBuffer("assets/fart.wav");
   ResourceManager::deleteTexture(textureName);
 }
 
@@ -27,9 +31,10 @@ const Transform & GameObject::getNodeTransform() { return Sprite::getTransform()
 
 void GameObject::onKeyDown(PEvent &e) {
   if (e.key.code == Keyboard::P) {
-    Sound s;
-    s.setBuffer(ResourceManager::getSoundBuffer("assets/beep.wav"));
-    s.play();
+    Sound* s = new Sound();
+    s->setBuffer(ResourceManager::getSoundBuffer("assets/fart.wav"));
+    s->setPitch((float)(rand()%300)/100.);
+    s->play();
   }
   rotate(10.);
   e.propagate = false;

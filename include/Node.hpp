@@ -6,6 +6,7 @@
 #include <map>
 #include <list>
 #include "PEvent.hpp"
+
 using namespace sf;
 using namespace std;
 
@@ -19,7 +20,7 @@ public:
   Node();
   Node(string texture);
   Node(const Node& orig);
- // ~Node();
+  virtual ~Node();
       
   string getName() const;
   void setIndex(int z);

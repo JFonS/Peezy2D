@@ -4,6 +4,15 @@
 
 Node::Node(): name("none"), zIndex(0) {}
 
+Node::~Node()
+{
+    DbgWarning("destroyed");
+    for(auto it : childrenOrder)
+    {
+       delete it;
+    }
+}
+
 string Node::getName() const { return name; }
 
 int Node::getIndex() const { return zIndex; }
@@ -11,7 +20,9 @@ int Node::getIndex() const { return zIndex; }
 void Node::setIndex(int z) { zIndex = z; }
 
 bool Node::zIndexSort(const Node* first, const Node* second) {
-	return first->getIndex() <= second->getIndex();
+	if (first->getIndex() < second->getIndex()) return true;
+	else if (first->getIndex() == second->getIndex()) return first > second;
+	else return false;
 }
 
 void Node::addChild(Node* go) {

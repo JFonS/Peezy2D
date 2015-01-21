@@ -1,28 +1,44 @@
-#include "PeezyWin.hpp"
-#include "Debug.hpp"
-#include "GameObject.hpp"
-#include "PText.hpp"
+#include "../include/PeezyWin.hpp"
+#include "../include/Debug.hpp"
+#include "../include/GameObject.hpp"
+#include "../include/PText.hpp"
 
 PeezyWin::PeezyWin(Vector2i size) {
     window = new RenderWindow(VideoMode(size.x, size.y), "");
-    scenes = SceneMap();
-    activeScene = NULL;
+    scenes = SceneStack();
     startUp();
     _loop();
 }
 
-void PeezyWin::addScene(Scene* sc) {
-  DbgLog("Added scene: " << sc->getName());
-  scenes.insert(pair<string,Scene*>(sc->getName(), sc));
+PeezyWin::~PeezyWin()
+{
+    DbgWarning("destroyed");
+    while(!scenes.empty())
+    {
+        delete scenes.top();
+        scenes.pop();
+    }
+    DbgWarning("destroyed2");
 }
 
-void PeezyWin::setActiveScene(string scName) {
-  DbgLog("Setting active: " << scName);
-  if (scenes.find(scName) != scenes.end()) {
-    activeScene = scenes[scName];
-  } else {
-    DbgWarning("The scene doesn't exist");
-  }
+void PeezyWin::pushScene(Scene* sc) {
+  DbgLog("Pushed scene: " << sc->getName());
+  scenes.push(sc); 
+}
+
+void PeezyWin::popScene() {
+  scenes.pop();
+}
+
+void PeezyWin::changeScene(Scene* sc){
+  if(scenes.empty()) popScene(); 
+  pushScene(sc);
+  return;
+}
+
+Scene* PeezyWin::peekScene(){
+  if(this->scenes.empty()) return nullptr;
+  return this->scenes.top(); 
 }
 
 void PeezyWin::startUp() {
@@ -48,13 +64,11 @@ void PeezyWin::startUp() {
     text->rotate(25.);
     
     Scene* scene = new Scene("game");
-    scene->addChild(go);
     scene->addChild(text);
-    go->addChild(go2);
-
-    addScene(scene);
-    setActiveScene("game");
-};
+    scene->addChild(go); 
+    scene->addChild(go2);
+    pushScene(scene);
+}
 
 void PeezyWin::loop(float dt){}
 
@@ -63,22 +77,23 @@ void PeezyWin::_loop() {
     while (window->isOpen()) {
         Event event;
         while (window->pollEvent(event)) {
-            if (event.type == Event::Closed)
-                window->close();
-            else if (activeScene != NULL) {
+            if (event.type == Event::Closed) {
+                window->close();DbgLog("closed");
+                return;
+            }
+            else if (peekScene() != NULL) {
               PEvent e(event);
-              activeScene->onEvent(e);
+              peekScene()->onEvent(e);
             }
         }
         window->clear();
         Time dTime = deltaClock.restart();
         float dt = dTime.asSeconds();
         loop(dt);
-        if (activeScene != NULL) {
-          activeScene->update(dt);
-          activeScene->draw(*window);
+        if (peekScene() != NULL) {
+          peekScene()->update(dt);
+          peekScene()->draw(*window);
         }
-
         window->display();
     }
 }
