@@ -29,6 +29,11 @@ void GameObject::onUpdate(float dt){}
 
 const Transform & GameObject::getNodeTransform() { return Sprite::getTransform();}
 
+Rect<float> GameObject::getBoundingBox()
+{
+    return getLocalBounds();
+}
+
 void GameObject::onKeyDown(PEvent &e) {
   if (e.key.code == Keyboard::P) {
     Sound* s = new Sound();
@@ -40,22 +45,18 @@ void GameObject::onKeyDown(PEvent &e) {
   e.propagate = false;
 }
 
-void GameObject::onMouseMove(PEvent &e)
+void GameObject::onMouseEnter(PEvent &e)
 {
-    bool wasOver = isOver;
-    isOver = isMouseOver(Vector2f(e.mouseMove.x, e.mouseMove.y));
-    if(not wasOver and isOver) onMouseEnter(e);
-    else if(wasOver and not isOver) onMouseExit(e);
-    if(isOver) onMouseOver(e);
+    DbgLog("Enter " << name);
 }
 
-
-void GameObject::onMouseEnter(PEvent &e){}
-void GameObject::onMouseExit(PEvent &e){}
-void GameObject::onMouseOver(PEvent &e){}
-
-bool GameObject::isMouseOver(const Vector2f pos)
+void GameObject::onMouseExit(PEvent &e)
 {
-    return	(Position.x < GetPosition().x + GetSize().x) && (GetPosition().x < Position.x) &&
-            (Position.y < GetPosition().y + GetSize().y) && (GetPosition().y < Position.y);
+    DbgLog("Exit " << name);
+}
+
+void GameObject::onMouseOver()
+{
+    //DbgLog("Over");
+    //DbgLog(rand()%100);
 }

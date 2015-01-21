@@ -34,30 +34,38 @@ public:
   void update(float dt);
   
   void onEvent(PEvent &e);
+
 protected: 
+
+  NodeMap children;
+  NodeList childrenOrder;
+
+  Transform myTransform;
+  string name;
+  int zIndex, childID;
+  bool mouseIsOver;
 
   virtual void onDraw(RenderTarget& target, const Transform& transform) = 0;
   virtual const Transform & getNodeTransform();
 
   virtual void onUpdate(float dt) = 0;
-  virtual void onKeyDown(PEvent &e);
-  virtual void onKeyUp(PEvent &e);
-  virtual void onMouseMove(PEvent &e);
-  virtual void onMouseDown(PEvent &e);
-  virtual void onMouseUp(PEvent &e);
+  virtual void onKeyDown(PEvent &e){}
+  virtual void onKeyUp(PEvent &e){}
 
-  bool isPointOverSprite(const Vector2f Position, const Sprite &Sprite);
+  virtual void onMouseEnter(PEvent &e){}
+  virtual void onMouseExit(PEvent &e){}
+  virtual void onMouseOver(){}
+  virtual void onMouseMove(PEvent &e){}
+  virtual void onMouseDown(PEvent &e){}
+  virtual void onMouseUp(PEvent &e){}
 
-  Transform myTransform;
-
-  string name;
-  int zIndex;
-   
-  int childID;
-  NodeMap children;
-  NodeList childrenOrder;
+  virtual Rect<float> getBoundingBox();
 
   static bool zIndexSort(const Node* first, const Node* second);
+
+private:
+
+  bool isMouseOver(const Vector2f mousePos);
 };
 
 #endif	/* NODE_HPP */

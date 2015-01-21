@@ -12,13 +12,11 @@ PeezyWin::PeezyWin(Vector2i size) {
 
 PeezyWin::~PeezyWin()
 {
-    DbgWarning("destroyed");
     while(!scenes.empty())
     {
         delete scenes.top();
         scenes.pop();
     }
-    DbgWarning("destroyed2");
 }
 
 void PeezyWin::pushScene(Scene* sc) {
@@ -46,13 +44,13 @@ void PeezyWin::startUp() {
     GameObject* go = new GameObject();
     go->setTexture("img.jpg");
     go->setIndex(200);
-    go->setRotation(45.);
+    //go->setRotation(45.);
     go->setColor(Color::Red);
     go->move(100, 100);
 
     GameObject* go2 = new GameObject();
     go2->setTexture("img.jpg");
-    go2->setRotation(45.);
+    //go2->setRotation(45.);
     go2->move(-10, -10);
     go2->setIndex(50);
 
@@ -61,7 +59,7 @@ void PeezyWin::startUp() {
     text->setOutline(true);
     text->setOutlineStroke(3);
     text->setOutlineColor(Color::Green);
-    text->rotate(25.);
+    //text->rotate(25.);
     
     Scene* scene = new Scene("game");
     scene->addChild(text);

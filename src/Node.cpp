@@ -2,7 +2,7 @@
 #include "include/ResourceManager.hpp"
 #include "Debug.hpp"
 
-Node::Node(): name("none"), zIndex(0) {}
+Node::Node(): name("none"), zIndex(0), mouseIsOver(false) {}
 
 Node::~Node()
 {
@@ -57,16 +57,11 @@ void Node::draw(RenderTarget& target, const Transform& parentTransform) {
 
 void Node::update(float dt) {
 	onUpdate(dt);
+    if(mouseIsOver) onMouseOver();
 	for (auto p : childrenOrder) p->update(dt);
 }
 
 const Transform & Node::getNodeTransform(){return Transform::Identity;}
-
-void Node::onKeyDown(PEvent &e){}
-void Node::onKeyUp(PEvent &e){}
-void Node::onMouseMove(PEvent &e){}
-void Node::onMouseDown(PEvent &e){}
-void Node::onMouseUp(PEvent &e){}
 
 void Node::onEvent(PEvent &e) {
 	switch (e.type) {
@@ -77,7 +72,17 @@ void Node::onEvent(PEvent &e) {
       onKeyUp(e);
       break;
     case Event::MouseMoved:
+    {
+      bool wasOver = mouseIsOver;
+      mouseIsOver = isMouseOver(Vector2f(e.mouseMove.x, e.mouseMove.y));
+
+      if(wasOver and not mouseIsOver) onMouseExit(e);
+      else if(not wasOver and mouseIsOver) onMouseEnter(e);
+
+      if(mouseIsOver) onMouseOver();
+
       onMouseMove(e);
+      }
       break;
     case Event::MouseButtonPressed:
       onMouseDown(e);
@@ -88,5 +93,15 @@ void Node::onEvent(PEvent &e) {
     default: break;
   }
   if (e.propagate) for (auto p : childrenOrder) p->onEvent(e);
+}
 
+bool Node::isMouseOver(const Vector2f mousePos)
+{
+    //DbgLog(mousePos.x << ", " << mousePos.y);
+    return getBoundingBox().contains(myTransform * mousePos);
+}
+
+Rect<float> Node::getBoundingBox()
+{
+    return Rect<float>(.0f, .0f, .0f, .0f);
 }
