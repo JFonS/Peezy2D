@@ -4,9 +4,11 @@
 #include "../include/PText.hpp"
 #include "../include/ButtonText.hpp"
 
+SceneStack PeezyWin::scenes = SceneStack();
+
 PeezyWin::PeezyWin(Vector2i size) {
     window = new RenderWindow(VideoMode(size.x, size.y), "");
-    scenes = SceneStack();
+
     startUp();
     _loop();
 }
@@ -22,7 +24,7 @@ PeezyWin::~PeezyWin()
 
 void PeezyWin::pushScene(Scene* sc) {
   DbgLog("Pushed scene: " << sc->getName());
-  scenes.push(sc); 
+  scenes.push(sc);
 }
 
 void PeezyWin::popScene() {
@@ -30,50 +32,17 @@ void PeezyWin::popScene() {
 }
 
 void PeezyWin::changeScene(Scene* sc){
-  if(scenes.empty()) popScene(); 
+  if(scenes.empty()) popScene();
   pushScene(sc);
   return;
 }
 
 Scene* PeezyWin::peekScene(){
-  if(this->scenes.empty()) return nullptr;
-  return this->scenes.top(); 
+  if(scenes.empty()) return nullptr;
+  return scenes.top();
 }
 
-void PeezyWin::startUp() {
-    //sample stuff (TO REMOVE)
-    GameObject* go = new GameObject("red");
-    go->setTexture("img.jpg");
-    go->setIndex(200);
-    //go->setRotation(45.);
-    go->setColor(Color::Red);
-    go->move(100, 100);
-
-    GameObject* go2 = new GameObject("white");
-    go2->setTexture("img.jpg");
-    //go2->setRotation(45.);
-    go2->move(-10, -10);
-    go2->setIndex(50);
-
-    PText* text = new PText("HOLA");
-    text->setIndex(200);
-    text->setOutline(true);
-    text->setOutlineStroke(3);
-    text->setOutlineColor(Color::Green);
-    //text->rotate(25.);
-
-    ButtonText* bt = new ButtonText();
-    bt->setIndex(500);
-    bt->move(20,20);
-    bt->downFunction = [](){ DbgLog("Doooooown"); };
-
-    Scene* scene = new Scene("game");
-    scene->addChild(text);
-    scene->addChild(go); 
-    scene->addChild(go2);
-    scene->addChild(bt);
-    pushScene(scene);
-}
+void PeezyWin::startUp() {}
 
 void PeezyWin::loop(float dt){}
 

@@ -16,7 +16,6 @@ GameObject::GameObject(string n): textureName("none") {
 GameObject::~GameObject()
 {
   DbgWarning("destroyed");
-  ResourceManager::deleteSoundBuffer("assets/fart.wav");
   ResourceManager::deleteTexture(textureName);
 }
 
@@ -39,29 +38,10 @@ Rect<float> GameObject::getBoundingBox()
     return getLocalBounds();
 }
 
-void GameObject::onKeyDown(PEvent &e) {
-  if (e.key.code == Keyboard::P) {
-    Sound* s = new Sound();
-    s->setBuffer(ResourceManager::getSoundBuffer("assets/fart.wav"));
-    s->setPitch((float)(rand()%300)/100.);
-    s->play();
-  }
-  rotate(10.);
-  e.propagate = false;
-}
+void GameObject::onKeyDown(PEvent &e) {}
 
-void GameObject::onMouseEnter(PEvent &e)
-{
-    DbgLog("Enter " << name);
-}
+void GameObject::onMouseEnter(PEvent &e){}
 
-void GameObject::onMouseExit(PEvent &e)
-{
-    DbgLog("Exit " << name);
-}
+void GameObject::onMouseExit(PEvent &e){}
 
-void GameObject::onMouseOver()
-{
-    //DbgLog("Over");
-    //DbgLog(rand()%100);
-}
+void GameObject::onMouseOver(){}

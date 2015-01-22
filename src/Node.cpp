@@ -1,6 +1,7 @@
 #include "../include/Node.hpp"
 #include "../include/ResourceManager.hpp"
 #include "../include/Debug.hpp"
+#include "../include/PeezyWin.hpp"
 
 Node::Node(): name("none"), zIndex(0), mouseIsOver(false) {}
 
@@ -98,7 +99,7 @@ void Node::onEvent(PEvent &e) {
 
 bool Node::isMouseOver(const Vector2f mousePos)
 {
-    return getBoundingBox().contains(getNodeTransform().getInverse() * mousePos);
+    return getBoundingBox().contains(PeezyWin::peekScene()->camera * getNodeTransform().getInverse() * mousePos);
 }
 
 Rect<float> Node::getBoundingBox()

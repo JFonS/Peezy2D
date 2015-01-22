@@ -17,10 +17,10 @@ public:
   PeezyWin(Vector2i size);
   virtual ~PeezyWin();
 
-  void pushScene(Scene* sc);
-  void popScene();
-  void changeScene(Scene* sc);
-  Scene* peekScene();
+  static void pushScene(Scene* sc);
+  static void popScene();
+  static void changeScene(Scene* sc);
+  static Scene* peekScene();
 
 private:
   void _loop();
@@ -29,7 +29,7 @@ private:
   virtual void loop(float dt);
   
   RenderWindow* window;
-  SceneStack scenes;
+  static SceneStack scenes;
 };
 
 #endif
