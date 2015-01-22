@@ -64,6 +64,7 @@ void PeezyWin::startUp() {
 
     ButtonText* bt = new ButtonText();
     bt->setIndex(500);
+    bt->move(20,20);
     bt->downFunction = [](){ DbgLog("Doooooown"); };
 
     Scene* scene = new Scene("game");

@@ -39,3 +39,6 @@ void ButtonText::goToDown() {
     downFunction();
 }
 
+const Transform& ButtonText::getNodeTransform(){ return PText::getTransform(); }
+
+Rect<float> ButtonText::getBoundingBox() { return PText::getBoundingBox(); }
