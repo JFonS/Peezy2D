@@ -5,7 +5,8 @@
 #include <string>
 #include <map>
 #include <list>
-#include "PEvent.hpp"
+#include "../include/PEvent.hpp"
+#include "../include/Debug.hpp"
 
 using namespace sf;
 using namespace std;

@@ -17,7 +17,7 @@ ButtonText::~ButtonText() { }
 
 void ButtonText::onMouseEnter(PEvent &e) { goToOver(); }
 void ButtonText::onMouseExit(PEvent &e) { goToIdle(); }
-void ButtonText::onMouseDown(PEvent &e) { goToDown(); }
+void ButtonText::onMouseDown(PEvent &e) { if(mouseIsOver) goToDown(); }
 void ButtonText::onMouseUp(PEvent &e) { if(mouseIsOver) goToOver(); else goToIdle(); }
 
 void ButtonText::goToIdle() {
