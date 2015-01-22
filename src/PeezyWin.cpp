@@ -8,9 +8,6 @@ SceneStack PeezyWin::scenes = SceneStack();
 
 PeezyWin::PeezyWin(Vector2i size) {
     window = new RenderWindow(VideoMode(size.x, size.y), "");
-
-    startUp();
-    _loop();
 }
 
 PeezyWin::~PeezyWin()
@@ -70,4 +67,9 @@ void PeezyWin::_loop() {
         }
         window->display();
     }
+}
+
+void PeezyWin::play() {
+    startUp();
+    _loop();
 }

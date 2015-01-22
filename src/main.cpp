@@ -6,13 +6,14 @@
 #include "../include/Scene.hpp"
 #include "../include/PText.hpp"
 #include "../include/PeezyWin.hpp"
+#include "../pong/Pong.hpp"
 
 using namespace std;
 using namespace sf;
 
 int main(int argc, char* argv[]) {
-    Vector2i winSize(600, 600);
-    PeezyWin win = PeezyWin(winSize);
+    Pong game = Pong();
+    game.play();
     return 0;
 }
 

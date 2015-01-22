@@ -16,17 +16,18 @@ class PeezyWin {
 public:
   PeezyWin(Vector2i size);
   virtual ~PeezyWin();
+  void play();
 
   static void pushScene(Scene* sc);
   static void popScene();
   static void changeScene(Scene* sc);
   static Scene* peekScene();
 
-private:
+protected:
   void _loop();
    
-  virtual void startUp();
-  virtual void loop(float dt);
+  virtual void startUp() = 0;
+  virtual void loop(float dt) = 0;
   
   RenderWindow* window;
   static SceneStack scenes;
