@@ -58,7 +58,8 @@ void Node::draw(RenderTarget& target, const Transform& parentTransform) {
 }
 
 void Node::update(float dt) {
-	onUpdate(dt);
+    DbgLog("asfdasfafs" << name);
+    this->onUpdate(dt);
     if(mouseIsOver) onMouseOver();
 	for (auto p : childrenOrder) p->update(dt);
 }

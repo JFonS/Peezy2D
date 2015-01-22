@@ -29,7 +29,7 @@ void GameObject::onDraw(RenderTarget& target, const Transform& transform) {
   target.draw(*this, transform);
 }
 
-void GameObject::onUpdate(float dt){}
+//void GameObject::onUpdate(float dt){DbgLog("asfasf");}
 
 const Transform & GameObject::getNodeTransform() { return Sprite::getTransform();}
 

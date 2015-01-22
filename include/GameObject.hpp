@@ -18,7 +18,7 @@ public:
     virtual ~GameObject();
 
     void setTexture(string texture);
-    virtual void onUpdate(float dt);
+    virtual void onUpdate(float dt) =0;
 
 private:
 

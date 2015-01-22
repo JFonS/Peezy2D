@@ -48,7 +48,7 @@ protected:
   virtual void onDraw(RenderTarget& target, const Transform& transform) = 0;
   virtual const Transform & getNodeTransform();
 
-  virtual void onUpdate(float dt) = 0;
+  virtual void onUpdate(float dt) =0;
   virtual void onKeyDown(PEvent &e){}
   virtual void onKeyUp(PEvent &e){}
 
