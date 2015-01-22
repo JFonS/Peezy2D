@@ -63,6 +63,8 @@ protected:
 
   static bool zIndexSort(const Node* first, const Node* second);
 
+  static Vector2f globalToLocal(Vector2f pos);
+  static Vector2f localToGlobal(Vector2f pos);
 private:
 
   bool isMouseOver(const Vector2f mousePos);

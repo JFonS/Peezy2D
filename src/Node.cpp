@@ -106,3 +106,12 @@ Rect<float> Node::getBoundingBox()
 {
     return Rect<float>(.0f, .0f, .0f, .0f);
 }
+
+Vector2f Node::localToGlobal(Vector2f pos) {
+    return PeezyWin::peekScene()->camera.transformPoint(pos);
+}
+
+Vector2f Node::globalToLocal(Vector2f pos) {
+    return PeezyWin::peekScene()->camera.getInverse().transformPoint(pos);
+}
+
