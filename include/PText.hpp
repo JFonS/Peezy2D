@@ -41,6 +41,8 @@ public:
 
     virtual void onDraw(RenderTarget& target, const Transform& transform);
     virtual void onUpdate(float dt);
+
+    Rect<float> getBoundingBox();
 };
 
 #endif // PTEXT_H

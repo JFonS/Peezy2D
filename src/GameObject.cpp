@@ -1,6 +1,6 @@
 #include "../include/GameObject.hpp"
 #include "../include/ResourceManager.hpp"
-#include "Debug.hpp"
+#include "../include/Debug.hpp"
 #include <stdlib.h>
 
 GameObject::GameObject(): textureName("none") {

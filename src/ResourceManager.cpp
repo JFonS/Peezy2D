@@ -1,5 +1,5 @@
-#include "include/ResourceManager.hpp"
-#include "include/Debug.hpp"
+#include "../include/ResourceManager.hpp"
+#include "../include/Debug.hpp"
 #include <map>
 
 ResourceMap ResourceManager::textures = ResourceMap();

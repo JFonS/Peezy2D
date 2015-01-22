@@ -1,6 +1,6 @@
-#include "include/Scene.hpp"
-#include "include/Node.hpp"
-#include "include/Debug.hpp"
+#include "../include/Scene.hpp"
+#include "../include/Node.hpp"
+#include "../include/Debug.hpp"
 
 Scene::Scene(string n) {
   Node::name = n;

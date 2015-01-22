@@ -1,6 +1,6 @@
-#include "include/Node.hpp"
-#include "include/ResourceManager.hpp"
-#include "Debug.hpp"
+#include "../include/Node.hpp"
+#include "../include/ResourceManager.hpp"
+#include "../include/Debug.hpp"
 
 Node::Node(): name("none"), zIndex(0), mouseIsOver(false) {}
 
@@ -98,7 +98,6 @@ void Node::onEvent(PEvent &e) {
 
 bool Node::isMouseOver(const Vector2f mousePos)
 {
-    //DbgLog(mousePos.x << ", " << mousePos.y);
     return getBoundingBox().contains(getNodeTransform().getInverse() * mousePos);
 }
 

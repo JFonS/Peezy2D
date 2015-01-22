@@ -1,6 +1,6 @@
-#include "include/PText.hpp"
+#include "../include/PText.hpp"
 
-PText::PText() : outline(true), blowing(false), flickering(false), visibleFlicker(true), outlineStroke(1),
+PText::PText() : outline(true), blowing(false), flickering(false), visibleFlicker(true), outlineStroke(3),
                  originalSize(30), flickerToggleTime(0), totalTimesFlicker(0), timesFlickered(0), blowingTime(-1),
                  outlineColor(Color::Black)
 {
@@ -92,6 +92,11 @@ void PText::onUpdate(float dt)
             else setCharacterSize( originalSize * ( 1.0f + blowingMult - blowingMult * ((bms-bt)/bt) ) );
         }
     }
+}
+
+Rect<float> PText::getBoundingBox()
+{
+    return getLocalBounds();
 }
 
 void PText::onDraw(RenderTarget& target, const Transform& transform) 

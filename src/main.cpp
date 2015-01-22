@@ -1,11 +1,11 @@
 #include <SFML/Graphics.hpp>
 
-#include "Debug.hpp"
-#include "GameObject.hpp"
-#include "ResourceManager.hpp"
-#include "Scene.hpp"
-#include "PText.hpp"
-#include "PeezyWin.hpp"
+#include "../include/Debug.hpp"
+#include "../include/GameObject.hpp"
+#include "../include/ResourceManager.hpp"
+#include "../include/Scene.hpp"
+#include "../include/PText.hpp"
+#include "../include/PeezyWin.hpp"
 
 using namespace std;
 using namespace sf;

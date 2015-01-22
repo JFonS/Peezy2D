@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "include/Debug.hpp"
+#include "../include/Debug.hpp"
 
 using namespace sf;
 

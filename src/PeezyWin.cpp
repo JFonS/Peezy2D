@@ -2,6 +2,7 @@
 #include "../include/Debug.hpp"
 #include "../include/GameObject.hpp"
 #include "../include/PText.hpp"
+#include "../include/ButtonText.hpp"
 
 PeezyWin::PeezyWin(Vector2i size) {
     window = new RenderWindow(VideoMode(size.x, size.y), "");
@@ -60,11 +61,16 @@ void PeezyWin::startUp() {
     text->setOutlineStroke(3);
     text->setOutlineColor(Color::Green);
     //text->rotate(25.);
-    
+
+    ButtonText* bt = new ButtonText();
+    bt->setIndex(500);
+    bt->downFunction = [](){ DbgLog("Doooooown"); };
+
     Scene* scene = new Scene("game");
     scene->addChild(text);
     scene->addChild(go); 
     scene->addChild(go2);
+    scene->addChild(bt);
     pushScene(scene);
 }
 
