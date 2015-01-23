@@ -3,6 +3,7 @@
 
 #include "../include/Debug.hpp"
 #include "../include/Scene.hpp"
+#include "../include/MovieClip.hpp"
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <stack>
@@ -26,8 +27,8 @@ public:
 protected:
   void _loop();
    
-  virtual void startUp() = 0;
-  virtual void loop(float dt) = 0;
+  virtual void startUp();
+  virtual void loop(float dt);
   
   RenderWindow* window;
   static SceneStack scenes;

@@ -39,9 +39,27 @@ Scene* PeezyWin::peekScene(){
   return scenes.top();
 }
 
-void PeezyWin::startUp() {}
+void PeezyWin::startUp()
+{
+    Scene *s = new Scene("esc1");
 
-void PeezyWin::loop(float dt){}
+    MovieClip *mc = new MovieClip();
+    mc->addFrame("assets/frame1");
+    mc->addKeyFrame("assets/frame2", "salta");
+    mc->addFrame("assets/frame3");
+    mc->addFrame("assets/frame4");
+    mc->addKeyFrame("assets/frame5", "Fsalta");
+    mc->addFrame("assets/frame6");
+
+    s->addChild(mc);
+    this->pushScene(s);
+    mc->gotoAndPlay("salta");
+}
+
+void PeezyWin::loop(float dt)
+{
+
+}
 
 void PeezyWin::_loop() {
     Clock deltaClock;

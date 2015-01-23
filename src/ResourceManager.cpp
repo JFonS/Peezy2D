@@ -5,6 +5,17 @@
 ResourceMap ResourceManager::textures = ResourceMap();
 ResourceMap ResourceManager::sounds = ResourceMap();
 
+void ResourceManager::deleteTexture(Texture *t)
+{
+    for(ResourceMap::iterator it = textures.begin(); it != textures.end(); ++it)
+    {
+        if(t == it->second.res) {
+            textures.erase(it);
+            return;
+        }
+    }
+}
+
 void ResourceManager::deleteTexture(string texturePath) {
     ResourceMap::iterator it;
     if ((it = textures.find(texturePath)) != textures.end()) {
@@ -15,7 +26,6 @@ void ResourceManager::deleteTexture(string texturePath) {
         } 
     }
 }
-
 
 Texture& ResourceManager::getTexture(string texturePath) {
     Texture* ret;
@@ -57,4 +67,3 @@ void ResourceManager::deleteSoundBuffer(string soundPath) {
         } 
     }
 }
-

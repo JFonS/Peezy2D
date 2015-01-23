@@ -24,12 +24,13 @@ struct Resource {
         }
     };
 
-typedef map<string,Resource> ResourceMap;
+typedef map<string, Resource> ResourceMap;
 
 class ResourceManager {
       
 public:
     static Texture& getTexture(string texturePath);
+    static void deleteTexture(Texture *t);
     static void deleteTexture(string texturePath);
 
     static SoundBuffer& getSoundBuffer(string soundPath);
