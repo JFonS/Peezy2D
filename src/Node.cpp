@@ -51,7 +51,7 @@ Node* Node::getChild(string name) {
 }
 
 void Node::draw(RenderTarget& target, const Transform& parentTransform) {
-	Transform combinedTransform = parentTransform * getNodeTransform();
+    Transform combinedTransform = parentTransform * getNodeTransform();
 	onDraw(target, parentTransform);
 	childrenOrder.sort(zIndexSort);
 	for (auto p : childrenOrder) p->draw(target, combinedTransform);
@@ -64,6 +64,11 @@ void Node::update(float dt) {
 }
 
 const Transform & Node::getNodeTransform(){return Transform::Identity;}
+
+Rect<float> Node::getGlobalBB()
+{
+    return getNodeTransform().transformRect( getLocalBB() );
+}
 
 void Node::onEvent(PEvent &e) {
 	switch (e.type) {
@@ -99,19 +104,14 @@ void Node::onEvent(PEvent &e) {
 
 bool Node::isMouseOver(const Vector2f mousePos)
 {
-    return getBoundingBox().contains(PeezyWin::peekScene()->camera * getNodeTransform().getInverse() * mousePos);
-}
-
-Rect<float> Node::getBoundingBox()
-{
-    return Rect<float>(.0f, .0f, .0f, .0f);
+    return getGlobalBB().contains(mousePos);
 }
 
 Vector2f Node::localToGlobal(Vector2f pos) {
-    return PeezyWin::peekScene()->camera.transformPoint(pos);
+    return PeezyWin::peekScene()->camera.getInverse() * getNodeTransform().getInverse() * pos;
 }
 
 Vector2f Node::globalToLocal(Vector2f pos) {
-    return PeezyWin::peekScene()->camera.getInverse().transformPoint(pos);
+    return PeezyWin::peekScene()->camera * getNodeTransform() * pos;
 }
 

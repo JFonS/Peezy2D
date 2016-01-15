@@ -96,6 +96,13 @@ using namespace std;
 ostream& operator<<(ostream &log, const Vector2f &v);
 ostream& operator<<(ostream &log, const Vector2i &v);
 
+template<class T>
+ostream& operator<<(ostream &log, const Rect<T> &r)
+{
+    log << "(l: " << r.left << ", t: " << r.top << ", w: " << r.width << ", h: " << r.height << ")";
+    return log;
+}
+
 class Debug
 {
 private:

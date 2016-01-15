@@ -20,6 +20,8 @@ public:
     void setTexture(string texture);
     virtual void onUpdate(float dt) = 0;
 
+    Rect<float> getLocalBB();
+
 private:
 
     void onKeyDown(PEvent &e);
@@ -30,8 +32,6 @@ private:
     string textureName;
     virtual void onDraw(RenderTarget& target, const Transform& transform);
     const Transform & getNodeTransform();
-
-    Rect<float> getBoundingBox();
 };
 
 #endif	/* GAMEOBJECT_HPP */

@@ -31,7 +31,7 @@ void MovieClip::onUpdate(float dt)
                 if(currentKeyFrame == "") currentFrame = 0;
                 else currentFrame = keyFrames[currentKeyFrame];
             }
-            else if(currentKeyFrame != "" && currentFrame > keyFrames["F" + currentKeyFrame])
+            else if(currentKeyFrame != "" && currentFrame > keyFrames["FFF" + currentKeyFrame])
             {
                 currentFrame = keyFrames[currentKeyFrame];
             }
@@ -45,10 +45,11 @@ void MovieClip::addFrame(string texturePath)
     if(textures.size() == 1) Sprite::setTexture(*textures[currentFrame]);
 }
 
-void MovieClip::addKeyFrame(string texturePath, string keyFrameName)
+void MovieClip::addKeyFrame(string texturePath, string keyFrameName, bool finalFrame)
 {
     textures.push_back(&ResourceManager::getTexture(texturePath));
-    keyFrames[keyFrameName] = textures.size()-1;
+    if(!finalFrame) keyFrames[keyFrameName] = textures.size()-1;
+    else keyFrames["FFF" + keyFrameName] = textures.size()-1;
 }
 
 void MovieClip::gotoAndPlay(string keyFrameName)

@@ -16,7 +16,8 @@ class Node;
 typedef map<string,Node*> NodeMap;
 typedef list<Node*> NodeList;
 
-class Node {
+class Node
+{
 public:
   Node();
   Node(string name);
@@ -35,6 +36,16 @@ public:
   void update(float dt);
   
   void onEvent(PEvent &e);
+
+  Rect<float> getGlobalBB(); //Gets transformed bounding box
+  virtual Rect<float> getLocalBB() { return Rect<float>(.0f, .0f, .0f, .0f); } //Gets UNtransformed bounding box
+  float getLocalWidth()  { return getLocalBB().width;  }
+  float getLocalHeight() { return getLocalBB().height; }
+  float getWidth()  { return getGlobalBB().width;  }
+  float getHeight() { return getGlobalBB().height; }
+  float getLeft()   { return getGlobalBB().left;   }
+  float getTop()    { return getGlobalBB().top;    }
+  bool  collidesWith(Node *go) { return getGlobalBB().intersects(go->getGlobalBB()); }
 
 protected: 
 
@@ -59,12 +70,10 @@ protected:
   virtual void onMouseDown(PEvent &e){}
   virtual void onMouseUp(PEvent &e){}
 
-  virtual Rect<float> getBoundingBox();
-
   static bool zIndexSort(const Node* first, const Node* second);
 
-  static Vector2f globalToLocal(Vector2f pos);
-  static Vector2f localToGlobal(Vector2f pos);
+  Vector2f globalToLocal(Vector2f pos);
+  Vector2f localToGlobal(Vector2f pos);
 private:
 
   bool isMouseOver(const Vector2f mousePos);

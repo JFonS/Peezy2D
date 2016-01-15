@@ -30,7 +30,7 @@ public:
     virtual ~MovieClip();
 
     void addFrame(string texturePath);
-    void addKeyFrame(string texturePath, string keyFrameName);
+    void addKeyFrame(string texturePath, string keyFrameName, bool finalFrame = false);
 
     virtual void onUpdate(float dt);
 

@@ -31,11 +31,16 @@ void GameObject::onDraw(RenderTarget& target, const Transform& transform) {
 
 //void GameObject::onUpdate(float dt){DbgLog("asfasf");}
 
-const Transform & GameObject::getNodeTransform() { return Sprite::getTransform();}
+const Transform & GameObject::getNodeTransform() { return Sprite::getTransform(); }
 
-Rect<float> GameObject::getBoundingBox()
+Rect<float> GameObject::getLocalBB()
 {
-    return getLocalBounds();
+    Rect<float> r;
+    r.left   = getPosition().x;
+    r.top    = getPosition().y;
+    r.width  = Sprite::getTexture()->getSize().x;
+    r.height = Sprite::getTexture()->getSize().y;
+    return r;
 }
 
 void GameObject::onKeyDown(PEvent &e) {}
