@@ -18,7 +18,9 @@ typedef list<Node*> NodeList;
 
 class Node
 {
+
 public:
+
   Node();
   Node(string name);
   Node(const Node& orig);
@@ -37,8 +39,9 @@ public:
   
   void onEvent(PEvent &e);
 
-  Rect<float> getGlobalBB(); //Gets transformed bounding box
-  virtual Rect<float> getLocalBB() { return Rect<float>(.0f, .0f, .0f, .0f); } //Gets UNtransformed bounding box
+  Rect<float> getGlobalBB();
+  virtual Rect<float> getLocalBB() = 0;
+
   float getLocalWidth()  { return getLocalBB().width;  }
   float getLocalHeight() { return getLocalBB().height; }
   float getWidth()  { return getGlobalBB().width;  }
@@ -57,23 +60,24 @@ protected:
   bool mouseIsOver;
 
   virtual void onDraw(RenderTarget& target, const Transform& transform) = 0;
-  virtual const Transform & getNodeTransform();
 
-  virtual void onUpdate(float dt) =0;
+  virtual void onUpdate(float dt) {}
   virtual void onKeyDown(PEvent &e){}
   virtual void onKeyUp(PEvent &e){}
 
   virtual void onMouseEnter(PEvent &e){}
   virtual void onMouseExit(PEvent &e){}
-  virtual void onMouseOver(){}
+  virtual void onMouseOver(PEvent &e){}
   virtual void onMouseMove(PEvent &e){}
   virtual void onMouseDown(PEvent &e){}
   virtual void onMouseUp(PEvent &e){}
 
   static bool zIndexSort(const Node* first, const Node* second);
 
+  virtual const Transform& getNodeTransform() = 0;
   Vector2f globalToLocal(Vector2f pos);
   Vector2f localToGlobal(Vector2f pos);
+
 private:
 
   bool isMouseOver(const Vector2f mousePos);

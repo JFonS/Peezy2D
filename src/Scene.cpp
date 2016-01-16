@@ -2,7 +2,8 @@
 #include "../include/Node.hpp"
 #include "../include/Debug.hpp"
 
-Scene::Scene(string n) {
+Scene::Scene(string n)
+{
   Node::name = n;
 }
 
@@ -13,10 +14,22 @@ Scene::~Scene()
 
 void Scene::onUpdate(float dt) {}
 
-void Scene::onDraw(RenderTarget& target, const Transform& transform){
+void Scene::onDraw(RenderTarget& target, const Transform& transform)
+{
 }
 
-void Scene::draw(RenderTarget& target) {
+const Transform& Scene::getNodeTransform()
+{
+    return camera;
+}
+
+Rect<float> Scene::getLocalBB()
+{
+    return Rect<float>(.0f, .0f, .0f, .0f);
+}
+
+void Scene::draw(RenderTarget& target)
+{
   Transform inverseCamera = camera.getInverse();
   childrenOrder.sort(zIndexSort);
   for (auto p : childrenOrder) p->draw(target, inverseCamera);

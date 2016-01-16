@@ -11,8 +11,11 @@ using namespace std;
 typedef map<string,Node*> NodeMap;
 typedef list<Node*> NodeList;
 
-class Scene: public Node {
+class Scene: public Node
+{
+
 public:
+
   Scene(string name);
   virtual ~Scene();
     
@@ -22,9 +25,13 @@ public:
   
   Vector2i sceneToWin(Vector2i pos);
   Vector2i winToScene(Vector2i pos);
-private:
+
+protected:
+
   virtual void onDraw(RenderTarget& target, const Transform& transform);
-  
+  virtual const Transform& getNodeTransform() override;
+
+  virtual Rect<float> getLocalBB() override;
 };
 
 #endif	/* SCENE_HPP */

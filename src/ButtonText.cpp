@@ -38,7 +38,3 @@ void ButtonText::goToDown() {
     setOutlineColor(outlineColorDown);
     downFunction();
 }
-
-const Transform& ButtonText::getNodeTransform(){ return PText::getNodeTransform(); }
-
-Rect<float> ButtonText::getBoundingBox() { return PText::getBoundingBox(); }

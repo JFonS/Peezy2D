@@ -22,7 +22,7 @@ public:
   static void pushScene(Scene* sc);
   static void popScene();
   static void changeScene(Scene* sc);
-  static Scene* peekScene();
+  static Scene* getScene();
 
 protected:
   void _loop();

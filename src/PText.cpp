@@ -94,9 +94,14 @@ void PText::onUpdate(float dt)
     }
 }
 
-Rect<float> PText::getBoundingBox()
+const Transform &PText::getNodeTransform()
 {
-    return getLocalBounds();
+    return Text::getTransform();
+}
+
+Rect<float> PText::getLocalBB()
+{
+    return Text::getLocalBounds();
 }
 
 void PText::onDraw(RenderTarget& target, const Transform& transform) 

@@ -42,7 +42,8 @@ public:
     virtual void onDraw(RenderTarget& target, const Transform& transform);
     virtual void onUpdate(float dt);
 
-    Rect<float> getBoundingBox();
+    const Transform& getNodeTransform() override;
+    Rect<float> getLocalBB() override;
 };
 
 #endif // PTEXT_H

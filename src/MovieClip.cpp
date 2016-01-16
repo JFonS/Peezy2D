@@ -39,6 +39,7 @@ void MovieClip::onUpdate(float dt)
     }
 }
 
+
 void MovieClip::addFrame(string texturePath)
 {
     textures.push_back(&ResourceManager::getTexture(texturePath));

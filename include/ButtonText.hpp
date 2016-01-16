@@ -30,9 +30,6 @@ public:
     void goToIdle();
     void goToOver();
     void goToDown();
-
-    const Transform& getNodeTransform();
-    Rect<float> getBoundingBox();
 };
 
 #endif // BUTTONTEXT_H

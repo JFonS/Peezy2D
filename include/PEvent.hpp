@@ -5,8 +5,10 @@
 
 using namespace sf;
 
-class PEvent : public Event {
+class PEvent : public Event
+{
 public:
+
   PEvent(const Event &e);
   bool propagate;    
 };

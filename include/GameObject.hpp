@@ -24,11 +24,6 @@ public:
 
 private:
 
-    void onKeyDown(PEvent &e);
-    void onMouseEnter(PEvent &e);
-    void onMouseExit(PEvent &e);
-    void onMouseOver();
-
     string textureName;
     virtual void onDraw(RenderTarget& target, const Transform& transform);
     const Transform & getNodeTransform();

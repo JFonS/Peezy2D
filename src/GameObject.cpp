@@ -29,8 +29,6 @@ void GameObject::onDraw(RenderTarget& target, const Transform& transform) {
   target.draw(*this, transform);
 }
 
-//void GameObject::onUpdate(float dt){DbgLog("asfasf");}
-
 const Transform & GameObject::getNodeTransform() { return Sprite::getTransform(); }
 
 Rect<float> GameObject::getLocalBB()
@@ -42,11 +40,3 @@ Rect<float> GameObject::getLocalBB()
     r.height = Sprite::getTexture()->getSize().y;
     return r;
 }
-
-void GameObject::onKeyDown(PEvent &e) {}
-
-void GameObject::onMouseEnter(PEvent &e){}
-
-void GameObject::onMouseExit(PEvent &e){}
-
-void GameObject::onMouseOver(){}

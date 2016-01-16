@@ -21,7 +21,8 @@ int Node::getIndex() const { return zIndex; }
 
 void Node::setIndex(int z) { zIndex = z; }
 
-bool Node::zIndexSort(const Node* first, const Node* second) {
+bool Node::zIndexSort(const Node* first, const Node* second)
+{
 	if (first->getIndex() < second->getIndex()) return true;
 	else if (first->getIndex() == second->getIndex()) return first > second;
 	else return false;
@@ -50,55 +51,70 @@ Node* Node::getChild(string name) {
 	return NULL;
 }
 
-void Node::draw(RenderTarget& target, const Transform& parentTransform) {
+void Node::draw(RenderTarget& target, const Transform& parentTransform)
+{
     Transform combinedTransform = parentTransform * getNodeTransform();
 	onDraw(target, parentTransform);
 	childrenOrder.sort(zIndexSort);
 	for (auto p : childrenOrder) p->draw(target, combinedTransform);
 }
 
-void Node::update(float dt) {
+void Node::update(float dt)
+{
     this->onUpdate(dt);
-    if(mouseIsOver) onMouseOver();
+
+    if(mouseIsOver)
+    {
+        Event e;
+        PEvent pe(e);
+        onMouseOver(pe);
+    }
+
 	for (auto p : childrenOrder) p->update(dt);
 }
-
-const Transform & Node::getNodeTransform(){return Transform::Identity;}
 
 Rect<float> Node::getGlobalBB()
 {
     return getNodeTransform().transformRect( getLocalBB() );
 }
 
-void Node::onEvent(PEvent &e) {
-	switch (e.type) {
-    case Event::KeyPressed:
-      onKeyDown(e);
-      break;
-    case Event::KeyReleased:
-      onKeyUp(e);
-      break;
-    case Event::MouseMoved:
+void Node::onEvent(PEvent &e)
+{
+    switch (e.type)
     {
-      bool wasOver = mouseIsOver;
-      mouseIsOver = isMouseOver(Vector2f(e.mouseMove.x, e.mouseMove.y));
+        case Event::KeyPressed:
+          onKeyDown(e);
+          break;
 
-      if(wasOver and not mouseIsOver) onMouseExit(e);
-      else if(not wasOver and mouseIsOver) onMouseEnter(e);
+        case Event::KeyReleased:
+          onKeyUp(e);
+          break;
 
-      if(mouseIsOver) onMouseOver();
+        case Event::MouseMoved:
+          {
+            bool wasOver = mouseIsOver;
+            mouseIsOver = isMouseOver(Vector2f(e.mouseMove.x, e.mouseMove.y));
 
-      onMouseMove(e);
-      }
-      break;
-    case Event::MouseButtonPressed:
-      onMouseDown(e);
-      break;
-    case Event::MouseButtonReleased:
-      onMouseUp(e);
-      break;
-    default: break;
-  }
+            if(wasOver and not mouseIsOver) onMouseExit(e);
+            else if(not wasOver and mouseIsOver) onMouseEnter(e);
+
+            if(mouseIsOver) onMouseOver(e);
+
+            onMouseMove(e);
+          }
+          break;
+
+        case Event::MouseButtonPressed:
+          if(mouseIsOver) onMouseDown(e);
+          break;
+
+        case Event::MouseButtonReleased:
+          if(mouseIsOver) onMouseUp(e);
+          break;
+
+        default: break;
+    }
+
   if (e.propagate) for (auto p : childrenOrder) p->onEvent(e);
 }
 
@@ -108,10 +124,10 @@ bool Node::isMouseOver(const Vector2f mousePos)
 }
 
 Vector2f Node::localToGlobal(Vector2f pos) {
-    return PeezyWin::peekScene()->camera.getInverse() * getNodeTransform().getInverse() * pos;
+    return PeezyWin::getScene()->camera.getInverse() * getNodeTransform().getInverse() * pos;
 }
 
 Vector2f Node::globalToLocal(Vector2f pos) {
-    return PeezyWin::peekScene()->camera * getNodeTransform() * pos;
+    return PeezyWin::getScene()->camera * getNodeTransform() * pos;
 }
 

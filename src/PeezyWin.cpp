@@ -19,31 +19,33 @@ PeezyWin::~PeezyWin()
     }
 }
 
-void PeezyWin::pushScene(Scene* sc) {
+void PeezyWin::pushScene(Scene* sc)
+{
   DbgLog("Pushed scene: " << sc->getName());
   scenes.push(sc);
 }
 
-void PeezyWin::popScene() {
-  scenes.pop();
-}
+void PeezyWin::popScene() { scenes.pop(); }
 
-void PeezyWin::changeScene(Scene* sc){
+void PeezyWin::changeScene(Scene* sc)
+{
   if(scenes.empty()) popScene();
   pushScene(sc);
   return;
 }
 
-Scene* PeezyWin::peekScene(){
+Scene* PeezyWin::getScene()
+{
   if(scenes.empty()) return nullptr;
   return scenes.top();
 }
 
-MovieClip *mc = new MovieClip();
+MovieClip *mc, *mc2;
 void PeezyWin::startUp()
 {
     Scene *s = new Scene("esc1");
 
+    mc = new MovieClip();
     mc->addFrame("assets/frame1");
     mc->addKeyFrame("assets/frame2", "salta");
     mc->addFrame("assets/frame3");
@@ -51,13 +53,26 @@ void PeezyWin::startUp()
     mc->addKeyFrame("assets/frame5", "salta", true);
     mc->addFrame("assets/frame6");
     mc->setScale(0.1f, 0.1f);
+    mc->setRotation(45.0f);
 
+    ButtonText *t = new ButtonText();
+    t->textDown = t->textIdle = t->textOver = "Hi";
+
+    t->colorIdle = sf::Color::Blue;
+    t->colorOver = sf::Color::Green;
+    t->colorDown = sf::Color::Red;
+
+    t->goToIdle();
+
+    //t->flicker(10, 500.0f);
+
+    s->addChild(t);
     s->addChild(mc);
 
-    MovieClip *mc2 = new MovieClip();
+    mc2 = new MovieClip();
     mc2->addFrame("assets/frame2");
-    mc2->setPosition(mc->getLocalWidth(), mc->getLocalHeight());
-    //mc2->setScale(0.3f, 0.3f);
+    mc2->setPosition(500, 500);
+    mc2->setScale(0.5f, 0.5f);
 
     mc->addChild(mc2);
 
@@ -73,30 +88,40 @@ void PeezyWin::loop(float dt)
 {
     static float y = 0.0f;
     y += dt * 20.0f;
-    //mc->setPosition(y, y);
+    mc->setRotation(y);
+    mc->setPosition(y, y);
+    if(mc2->collidesWith(mc)) DbgLog("COLLIDING");
 }
 
-void PeezyWin::_loop() {
+void PeezyWin::_loop()
+{
     Clock deltaClock;
-    while (window->isOpen()) {
+    while (window->isOpen())
+    {
         Event event;
-        while (window->pollEvent(event)) {
-            if (event.type == Event::Closed) {
+        while (window->pollEvent(event))
+        {
+            if (event.type == Event::Closed)
+            {
                 window->close();DbgLog("closed");
                 return;
             }
-            else if (peekScene() != NULL) {
+            else if (getScene() != NULL)
+            {
               PEvent e(event);
-              peekScene()->onEvent(e);
+              getScene()->onEvent(e);
             }
         }
         window->clear();
+
         Time dTime = deltaClock.restart();
         float dt = dTime.asSeconds();
         loop(dt);
-        if (peekScene() != NULL) {
-          peekScene()->update(dt);
-          peekScene()->draw(*window);
+
+        if (getScene() != NULL)
+        {
+          getScene()->update(dt);
+          getScene()->draw(*window);
         }
         window->display();
     }

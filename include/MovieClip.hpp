@@ -33,6 +33,10 @@ public:
     void addKeyFrame(string texturePath, string keyFrameName, bool finalFrame = false);
 
     virtual void onUpdate(float dt);
+    virtual void onMouseOver(PEvent &e) override
+    {
+        DbgLog("LALALLA");
+    }
 
     void gotoAndPlay(string keyFrameName);
     void gotoAndStop(string keyFrameName);
