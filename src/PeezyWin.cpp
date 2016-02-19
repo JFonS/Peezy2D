@@ -29,7 +29,7 @@ void PeezyWin::popScene() { scenes.pop(); }
 
 void PeezyWin::changeScene(Scene* sc)
 {
-  if(scenes.empty()) popScene();
+  if(!scenes.empty()) popScene();
   pushScene(sc);
   return;
 }
